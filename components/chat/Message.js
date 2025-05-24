@@ -1,0 +1,25 @@
+
+function Message({message}){
+    return(
+        <div>
+             <li className="bg-zinc-800 p-3 w-fit  rounded-tl-2xl rounded-r-xl text-white">
+                 {message.msg}
+             </li>
+             <div className="text-black text-sm flex items-center">
+                <p className="pr-2">
+                     {message.time}
+                 </p>
+                 <p>
+                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-check2-all" viewBox="0 0 16 16">
+                         <path d="M12.354 4.354a.5.5 0 0 0-.708-.708L5 10.293 1.854 7.146a.5.5 0 1 0-.708.708l3.5 3.5a.5.5 0 0 0 .708 0zm-4.208 7-.896-.897.707-.707.543.543 6.646-6.647a.5.5 0 0 1 .708.708l-7 7a.5.5 0 0 1-.708 0"/>
+                         <path d="m5.354 7.146.896.897-.707.707-.897-.896a.5.5 0 1 1 .708-.708"/>
+                         </svg>
+                 </p> 
+             </div>
+                        
+        </div>
+    );
+}
+
+
+export default Message;
