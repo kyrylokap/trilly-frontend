@@ -1,13 +1,13 @@
 
-function Message({message}){
+function Message({message, time}){
     return(
         <div>
              <li className="bg-zinc-800 p-3 w-fit  rounded-tl-2xl rounded-r-xl text-white">
-                 {message.msg}
+                {message}
              </li>
              <div className="text-black text-sm flex items-center">
                 <p className="pr-2">
-                     {message.time}
+                    {time}
                  </p>
                  <p>
                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-check2-all" viewBox="0 0 16 16">
