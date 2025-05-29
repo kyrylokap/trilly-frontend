@@ -40,8 +40,6 @@ function Login(){
                           Sign via Google  
                         </p>  
                     </Link>
-                      
-                    
                     
                 </form>
 
