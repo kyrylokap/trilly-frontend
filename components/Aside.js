@@ -11,7 +11,7 @@ function Aside(){
                 "http://localhost:9999/api/v1/users/"+ username +"/chats"
             )
             setChats(response.data)
-            console.log(response.statusText)
+            console.log(response.data)
         }
         catch(error){}
     };

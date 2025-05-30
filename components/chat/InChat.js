@@ -17,6 +17,8 @@ function InChat({selectedChatId, handleBack}){
     useEffect(() => {
         getMessages();
     }, [selectedChatId])
+
+  
     return(
         <div className="text-white ml-6">   
             <button className="text-white mb-4" onClick={handleBack}>
@@ -30,7 +32,10 @@ function InChat({selectedChatId, handleBack}){
                 ))}
             </ul>
         </div>
+        
         <input placeholder="Type something..." className="placeholder:text-white bg-[#18181a] outline-none text-lg  w-[100%] p-3 rounded-b-lg"/>
+        
+        
         </div>
     );
 }
