@@ -1,31 +1,29 @@
+import { useState } from "react";
 import Post from "./post/Post";
+import axios from 'axios'
 
+function Posts({username}){
 
-function Posts(){
+    const [posts, setPosts] = useState([]);
+    
+    const loadPosts = async () => {
+        try{
+            const response = await axios.get("http://localhost:9999/api/v1/users/" + username + "/posts")
+            setPosts(response.data)
+        }catch(e){}
+    }
 
-    const posts = [
-        {
-            user:"ydnmidny",
-            place:"New York, California",
-            photoUrl:"https://th.bing.com/th/id/OIP.dQHsjVQVrG7tjnGpE4Y4HAHaEK?cb=iwp2&rs=1&pid=ImgDetMain"
-        },{
-            user:"qwertyui0p",
-            place:"Dallas",
-            photoUrl:"https://th.bing.com/th/id/OIP.JTwRtbR_OcxB4tBNRNvqEAHaD5?w=343&h=180&c=7&r=0&o=7&cb=iwp2&pid=1.7&rm=3"
-        },{
-            user:"Ishchuk",
-            place:"Lublin",
-            photoUrl:"https://th.bing.com/th/id/OIP.e7qB3w9n70dXH2mddB0lygHaEK?w=285&h=180&c=7&r=0&o=7&cb=iwp2&pid=1.7&rm=3"
-        }
-    ];
-
+    useState(() => {
+        loadPosts()
+    })
+    
     return(
         <div className="h-[80vh] w-[60vw] bg-[#18181a]  overflow-auto scrollbar-hide">
             <ul>
                 {posts.map(
                     (post) =>{
                         return(
-                            <Post post={post}/>
+                            <Post post={post} username={username}/>
                         );    
                     }
                 )}

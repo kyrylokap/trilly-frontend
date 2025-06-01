@@ -1,7 +1,7 @@
 
-function Message({message, time}){
+function Message({message, time, sender, username}){
     return(
-        <div>
+        <div className={`flex flex-col ${username === sender ? 'items-end' : 'items-start'}`}>
              <li className="bg-zinc-800 p-3 w-fit  rounded-tl-2xl rounded-r-xl text-white">
                 {message}
              </li>

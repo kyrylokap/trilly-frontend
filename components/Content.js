@@ -2,11 +2,11 @@ import Aside from "./Aside";
 import Posts from "./Posts";
 import Nav from "./Nav";
 
-function Content(){
+function Content({username}){
     return(
         <div className="flex">
-            <Posts />
-            <Aside />   
+            <Posts username={username}/>
+            <Aside username={username}/>   
         </div>
         
     );

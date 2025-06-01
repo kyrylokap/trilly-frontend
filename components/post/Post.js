@@ -1,12 +1,13 @@
+
 import PostContent from "./PostContent";
 import PostInteraction from "./PostInteraction";
 
 
-function Post({post}) {
+function Post({post, username}) {
     return(
-        <div className="flex flex-row">
+        <div className="flex flex-row select-none">
             <PostContent post={post}/>
-            <PostInteraction />    
+            <PostInteraction postId={post.postId} username={username}/>    
         </div>
 
     );

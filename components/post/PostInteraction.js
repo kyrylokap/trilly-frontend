@@ -1,12 +1,26 @@
+import axios from "axios";
+import { use, useEffect, useState } from "react";
 
-function PostInteraction(){
+function PostInteraction({postId, username}){
+
+    const [like, setLike] = useState(false);
+
+    const likePost = async () => {
+        try{
+            const response = await axios.post(`http://localhost:9999/api/v1/users/${postId}/${username}`);
+            setLike(response.data)
+
+        }
+        catch(e){}
+    }
+
     return(
-        <div className="w-[30%] pl-3 pt-32">
-            <div className="flex items-center gap-2 cursor-pointer pb-3" >
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="red" class="bi bi-heart-fill" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
+        <div className="w-[30%] pl-3 pt-32 select-none">
+            <div className={`flex items-center gap-2 cursor-pointer pb-3 `} onClick={likePost}>
+                <svg xmlns="http://www.w3.org/2000/svg"   width="20" height="20" fill="currentColor" className={`bi bi-heart-fill ${like ? 'text-red-600' : 'text-white'} cursor-pointer`}  viewBox="0 0 16 16">
+                    <path fillRule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
                 </svg>
-                <p className="text-white">
+                <p className="text-white ">
                     Like
                 </p>
             </div>
