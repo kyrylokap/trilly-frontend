@@ -3,7 +3,7 @@ import Content from '../Content'
 function Main(){
     const username = "kyrylo"
     return(
-        <div className='w-[100vw] h-[100vh]'>
+        <div className='w-[100vw] h-[100vh] select-none'>
             <Nav />
             <Content username={username}/>
         </div>

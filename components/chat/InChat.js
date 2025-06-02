@@ -1,10 +1,11 @@
 import Message from './Message'
 import axios from 'axios'
-import { useState, useEffect } from "react";
+import { useState, useEffect ,useRef} from "react";
 
 function InChat({selectedChatId, handleBack, username}){
     const [messagesDTO, setMessages] = useState({ messages: [], times: [] })
     const [input, setInput] = useState('')
+    const containerRef = useRef(null);
     const getMessages = async () => {
         try{
             const response = await axios.get(
@@ -17,8 +18,15 @@ function InChat({selectedChatId, handleBack, username}){
     };
     useEffect(() => {
         getMessages();
+        
     }, [selectedChatId])
 
+    useEffect(() => {
+        const el = containerRef.current;
+        if(el){
+           el.scrollTop = el.scrollHeight;
+        }
+    }, [messagesDTO])
 
     const sendMessage = async (e) => {
         e.preventDefault();
@@ -43,7 +51,7 @@ function InChat({selectedChatId, handleBack, username}){
               ← Back
             </button>
         <h2 className="text-2xl font-semibold mb-4">Hello</h2>
-        <div className="bg-[#808080]  p-4 rounded-t-lg space-y-2  overflow-y-auto max-h-[470px] scrollbar-hide">
+        <div className="bg-[#808080]  p-4 rounded-t-lg space-y-2  overflow-y-auto max-h-[470px] scrollbar-hide" ref={containerRef}>
             <ul className="space-y-2 flex-col ">
                 {messagesDTO.messages.map((message, index) => (
                     <Message message={message} time={messagesDTO.times[index]} sender={messagesDTO.senders[index]} username={username}/>
