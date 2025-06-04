@@ -1,5 +1,5 @@
 import axios from "axios";
-import { use, useEffect, useState } from "react";
+import {useEffect, useState } from "react";
 
 function PostInteraction({postId, username}){
 
@@ -9,10 +9,11 @@ function PostInteraction({postId, username}){
         try{
             const response = await axios.post(`http://localhost:9999/api/v1/users/${postId}/${username}`);
             setLike(response.data)
-
         }
         catch(e){}
     }
+
+    
 
     return(
         <div className="w-[30%] pl-3 pt-32 select-none">
