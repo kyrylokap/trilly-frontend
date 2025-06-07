@@ -28,7 +28,7 @@ function Post({post, username}) {
         <div className="flex flex-row ">
             <PostContent post={post}/>
             {selectedComments === null ?
-                (<PostInteraction postId={post.postId} username={username} setSelectedComments={setSelectedComments} />): 
+                (<PostInteraction postId={post.postId} username={username} setSelectedComments={setSelectedComments} post={post}/>): 
                 (<Comments handleBack={handleBack} comments={comments}></Comments>)
             }
              
