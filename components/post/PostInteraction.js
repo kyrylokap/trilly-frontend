@@ -1,10 +1,10 @@
 import axios from "axios";
 import {useEffect, useState } from "react";
 
-function PostInteraction({postId, username}){
+function PostInteraction({postId, username, setSelectedComments}){
 
     const [like, setLike] = useState(false);
-
+    
     const likePost = async () => {
         try{
             const response = await axios.post(`http://localhost:9999/api/v1/users/${postId}/${username}`);
@@ -16,7 +16,7 @@ function PostInteraction({postId, username}){
     
 
     return(
-        <div className="w-[30%] pl-3 pt-32 select-none">
+            <div className="w-[30%] pl-3 pt-32 select-none">
             <div className={`flex items-center gap-2 cursor-pointer pb-3 `} onClick={likePost}>
                 <svg xmlns="http://www.w3.org/2000/svg"   width="20" height="20" fill="currentColor" className={`bi bi-heart-fill ${like ? 'text-red-600' : 'text-white'} cursor-pointer`}  viewBox="0 0 16 16">
                     <path fillRule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
@@ -37,11 +37,11 @@ function PostInteraction({postId, username}){
                 <svg  xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" class="bi bi-chat-dots-fill" viewBox="0 0 16 16">
                     <path d="M16 8c0 3.866-3.582 7-8 7a9 9 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7M5 8a1 1 0 1 0-2 0 1 1 0 0 0 2 0m4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0m3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
                 </svg>
-                <p className="text-white">
+                <p onClick={() => setSelectedComments(true)} className="text-white">
                     Comments
                 </p>
             </div>
-
+    
         </div>
     );
 }

@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useState, useEffect ,useRef} from "react";
 
 function InChat({selectedChatId, handleBack, username}){
-    const [messagesDTO, setMessages] = useState({ messages: [], times: [] })
+    const [messagesDTO, setMessages] = useState({ messages: [], times: [], senders:[] })
     const [input, setInput] = useState('')
     const containerRef = useRef(null);
     const getMessages = async () => {
@@ -54,7 +54,7 @@ function InChat({selectedChatId, handleBack, username}){
         <div className="bg-[#808080]  p-4 rounded-t-lg space-y-2  overflow-y-auto max-h-[470px] scrollbar-hide" ref={containerRef}>
             <ul className="space-y-2 flex-col ">
                 {messagesDTO.messages.map((message, index) => (
-                    <Message message={message} time={messagesDTO.times[index]} sender={messagesDTO.senders[index]} username={username}/>
+                    <Message key={index} message={message} time={messagesDTO.times[index]} sender={messagesDTO.senders[index]} username={username}/>
                 ))}
             </ul>
         </div>
