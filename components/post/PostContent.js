@@ -2,7 +2,7 @@
 
 function PostContent({post}) {
     return(
-        <div key={post} className="ml-7 mt-7 text-white w-[70%]">
+        <div key={post} className="ml-7 mt-7 text-white w-[60%] text-thin">
             <div className="flex items-center mb-7 cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg"  width="44" height="44" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                         <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
@@ -15,7 +15,7 @@ function PostContent({post}) {
                 <p className="ml-1">{post.place}</p>
             </div>
             <img src={post.mediaUrl} alt="photo" className="min-w-[100%] rounded-lg "/>
-            <p>{post.description}</p>
+            
         </div>
     );
 }

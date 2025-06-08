@@ -23,7 +23,7 @@ function Posts({username}){
                 {posts.map(
                     (post) =>{
                         return(
-                            <Post post={post} username={username}/>
+                            <Post post={post} username={username} />
                         );    
                     }
                 )}

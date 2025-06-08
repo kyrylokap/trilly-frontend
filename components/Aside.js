@@ -38,7 +38,7 @@ function Aside({username}){
       </div>
       {selectedChat === null ? 
         (<Chats chats={chats} setSelectedChat={setSelectedChat} username={username}/>): 
-        (<InChat selectedChatId={selectedChat.chatId} handleBack={handleBack} username={username}/>)
+        (<InChat selectedChatId={selectedChat.chatId} handleBack={handleBack} username={username} chatMembers={selectedChat.usernames}/>)
       }
     </div>
     );

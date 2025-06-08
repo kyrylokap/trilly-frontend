@@ -2,7 +2,7 @@ import Message from './Message'
 import axios from 'axios'
 import { useState, useEffect ,useRef} from "react";
 
-function InChat({selectedChatId, handleBack, username}){
+function InChat({selectedChatId, handleBack, username, chatMembers}){
     const [messagesDTO, setMessages] = useState({ messages: [], times: [], senders:[] })
     const [input, setInput] = useState('')
     const containerRef = useRef(null);
@@ -39,18 +39,18 @@ function InChat({selectedChatId, handleBack, username}){
                     "id": null
                 }   
             ); 
-            console.log('hello')
             setInput('')
             getMessages()
         }catch(error){}
     }
+    
   
     return(
         <div className="text-white ml-6">   
             <button className="text-white mb-4" onClick={handleBack}>
               ← Back
             </button>
-        <h2 className="text-2xl font-semibold mb-4">Hello</h2>
+        <h2 className="text-2xl font-semibold mb-4" > {chatMembers.filter((member) => member !== username).join(' ')}</h2>
         <div className="bg-[#808080]  p-4 rounded-t-lg space-y-2  overflow-y-auto max-h-[470px] scrollbar-hide" ref={containerRef}>
             <ul className="space-y-2 flex-col ">
                 {messagesDTO.messages.map((message, index) => (
