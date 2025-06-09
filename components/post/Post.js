@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 import PostContent from "./PostContent";
 import PostInteraction from "./PostInteraction";
-import Comments from "./Comments";
+import Comments from "./CommentsControl";
 
 function Post({post, username}) {
 
