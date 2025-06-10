@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 
 
-function Comments({handleBack, postId, username}){
+function CommentsControl({handleBack, postId, username, getProfile}){
     const [commentToSend, setComment] = useState('');
 
     const [comments,setComments] = useState([]);
@@ -33,15 +33,14 @@ function Comments({handleBack, postId, username}){
     }, [])
 
     return(
-        <div className="pl-4  w-[30%] bg-[#2a2a2e] mt-[99px] rounded-xl p-5 justify-around flex flex-col ">
+        <div className="pl-4  w-[30%] border-[#2a2a2e] border-2 border-l-0 mt-[99px] rounded-r-xl p-5 justify-around flex flex-col ">
             
             <div>
                 <p className="text-xl flex justify-center font-bold text-white">
                 Comments
                 </p>
-                <p className="text-gray-600 cursor-pointer font-bold text-lg hover:text-white duration-700 flex flex-row items-center" onClick={handleBack}>
-                
-                ←Back
+                <p className="text-white cursor-pointer font-bold text-lg  flex flex-row items-center" onClick={handleBack}>
+                    ←Back
                 </p>
             </div>
             <ul className="overflow-y-auto  scrollbar-hide flex flex-col max-h-[250px]">
@@ -51,16 +50,16 @@ function Comments({handleBack, postId, username}){
                         return(
                             <li key={comment.id} className="pb-4 flex-col font-extralight text-gray-500 m-0 gap-0">
                                 <div className="flex gap-3 cursor-pointer hover:text-white duration-500">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="black" class="bi bi-person" viewBox="0 0 16 16">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" class="bi bi-person" viewBox="0 0 16 16">
                                     <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
                                     </svg>
-                                    <p key={comment.username} className="font-normal ">
+                                    <p key={comment.username} className="font-normal text-white" onClick={() => getProfile(comment.username)}>
                                        {comment.username} 
                                     </p>
                                     
                                 </div>
                                 <div>
-                                  <p className="text-lg text-white object-fit break-words">
+                                  <p className="text-lg text-white  break-words">
                                     {comment.text}
                                   </p>
                                   <p className="text-xs">
@@ -88,4 +87,4 @@ function Comments({handleBack, postId, username}){
     );
 }
 
-export default Comments;
+export default CommentsControl;
