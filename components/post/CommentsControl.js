@@ -31,7 +31,7 @@ function CommentsControl({handleBack, postId, username, getProfile}){
     useEffect(() =>{
         getComments()
     }, [])
-
+    const v = '<'
     return(
         <div className="pl-4  w-[30%] border-[#2a2a2e] border-2 border-l-0 mt-[99px] rounded-r-xl p-5 justify-between flex flex-col">
             
@@ -40,7 +40,7 @@ function CommentsControl({handleBack, postId, username, getProfile}){
                 Comments
                 </p>
                 <p className="text-white cursor-pointer font-bold text-lg  flex flex-row items-center" onClick={handleBack}>
-                    ←Back
+                    {v}Back
                 </p>
             </div>
             <ul className="overflow-y-auto  scrollbar-hide flex flex-col max-h-[250px]">

@@ -3,10 +3,11 @@ import PostContent from "../post/PostContent";
 
 
 function UserProfile({profile, getBack, username}) {
+    const v = '<'
     return(
         <div className="text-white flex flex-col">
-            <p className=" cursor-pointer font-bold text-lg text-white flex flex-row items-center" onClick={getBack}>
-                ←Back
+            <p className=" cursor-pointer font-bold text-lg text-white flex flex-row items-center ml-4" onClick={getBack}>
+                {v}Back
             </p>
                 <div className="flex flex-row gap-8 m-8 ml-16 p-2">
 

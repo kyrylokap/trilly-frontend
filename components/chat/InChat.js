@@ -44,12 +44,15 @@ function InChat({selectedChatId, handleBack, username, chatMembers}){
         }catch(error){}
     }
     
-  
+   const v = '<'
+    
+                
+
     return(
         <div className="text-white ml-6">   
-            <button className="text-white mb-4" onClick={handleBack}>
-              ← Back
-            </button>
+            <p className="text-white cursor-pointer font-bold text-lg  flex flex-row items-center" onClick={handleBack}>
+                {v}Back
+            </p>
         <h2 className="text-2xl font-semibold mb-4" > {chatMembers.filter((member) => member !== username).join(' ')}</h2>
         <div className="bg-[#808080]  p-4 rounded-t-lg space-y-2  overflow-y-auto max-h-[470px] scrollbar-hide" ref={containerRef}>
             <ul className="space-y-2 flex-col ">

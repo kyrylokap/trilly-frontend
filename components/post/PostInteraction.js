@@ -20,13 +20,18 @@ function PostInteraction({postId, username, setSelectedComments, post }){
 
     return(
             <div className="w-[30%] pl-3 pt-8 select-none font-thin flex flex-col  border-[#2a2a2e] border-2 border-l-0 mt-[99px]">
-            <div >
-                <Likes likePost={likePost} post={post} like={like} />
-                <Shares />
-                <Comments setSelectedComments={setSelectedComments}/>
+                <div >
+                    <Likes likePost={likePost} post={post} like={like} />
+                    <Shares />
+                    <Comments setSelectedComments={setSelectedComments}/>
+                </div>
+                <div className="flex gap-4 whitespace-normal flex-wrap items-center">
+                    <p className="text-gray-300 p-0  font-thin pb-3">{post.username}</p>
+                    <p className="text-white p-0 text-lg font-thin pb-3 break-words text-ellipsis">{post.description}</p>
+                   
+                </div>
+                
             </div>
-            <p className="text-white p-0 text-xl font-medium pb-3">{post.description}</p>
-        </div>
     );
 }
 

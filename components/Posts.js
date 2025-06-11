@@ -33,7 +33,7 @@ function Posts({username}){
 
     return(
         <div className="h-[80vh] w-[60vw] bg-[#18181a]  overflow-auto scrollbar-hide">
-            <Search />
+            <Search getProfile={getProfile} setUserProfile={setUserProfile}/>
             {profile === null ? 
                     (<div>
                         <ul>
