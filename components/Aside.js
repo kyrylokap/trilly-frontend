@@ -33,7 +33,7 @@ function Aside({username}){
       <div className="flex flex-row items-center justify-center">
         <input
           placeholder="Search someone..."
-          className="rounded-2xl m-4 p-2 pl-4 outline-none placeholder-black w-[70%] bg-[#808080] text-black font-semibold placeholder:font-semibold"
+          className="rounded-2xl m-4 p-2 pl-4 outline-none placeholder-black w-[70%] bg-[#808080] text-black font-thin placeholder:font-thin"
         />
       </div>
       {selectedChat === null ? 

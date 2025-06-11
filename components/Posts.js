@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Post from "./post/Post";
 import axios from 'axios'
 import UserProfile from "./user/UserProfile";
-
+import Search from "./Search";
 function Posts({username}){
 
     const [posts, setPosts] = useState([]);
@@ -33,6 +33,7 @@ function Posts({username}){
 
     return(
         <div className="h-[80vh] w-[60vw] bg-[#18181a]  overflow-auto scrollbar-hide">
+            <Search />
             {profile === null ? 
                     (<div>
                         <ul>

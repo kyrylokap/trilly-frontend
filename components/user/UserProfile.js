@@ -8,7 +8,7 @@ function UserProfile({profile, getBack, username}) {
             <p className=" cursor-pointer font-bold text-lg text-white flex flex-row items-center" onClick={getBack}>
                 ←Back
             </p>
-                <div className="flex flex-row justify-end gap-8 m-8 ml-16 p-2">
+                <div className="flex flex-row gap-8 m-8 ml-16 p-2">
 
                     <div className="flex flex-col">
                         <svg xmlns="http://www.w3.org/2000/svg"  width="44" height="44" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
