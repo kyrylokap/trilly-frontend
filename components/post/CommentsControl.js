@@ -30,7 +30,7 @@ function CommentsControl({handleBack, postId, username, getProfile}){
     }
     useEffect(() =>{
         getComments()
-    }, [])
+    }, [comments])
     const v = '<'
     return(
         <div className="pl-4  w-[30%] border-[#2a2a2e] border-2 border-l-0 mt-[99px] rounded-r-xl p-5 justify-between flex flex-col">

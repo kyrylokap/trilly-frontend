@@ -19,7 +19,7 @@ function PostInteraction({postId, username, setSelectedComments, post }){
     
 
     return(
-            <div className="w-[30%] pl-3 pt-8 select-none font-thin flex flex-col  border-[#2a2a2e] border-2 border-l-0 mt-[99px]">
+            <div className="w-[30%] pl-3 pt-8 select-none font-thin flex flex-col  border-[#2a2a2e] border-2 border-l-0 mt-[99px] rounded-r-xl">
                 <div >
                     <Likes likePost={likePost} post={post} like={like} />
                     <Shares />

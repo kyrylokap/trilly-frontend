@@ -1,8 +1,51 @@
-import { use } from "react";
+import { use, useState, useEffect } from "react";
 import PostContent from "../post/PostContent";
-
+import axios from 'axios'
 
 function UserProfile({profile, getBack, username}) {
+    const [follow, setFollow] = useState(false);
+    const getFollow =  async() =>{
+        try{
+            const response = await axios.get('http://localhost:9999/api/v1/users/user/checkFollow',{
+                params:{
+                    firstUsername:username,
+                    secondUsername:profile.username
+                }
+            })
+            setFollow(response.data)
+        }catch(e){}
+    }
+    const [followersCount, setFollowersCount] = useState(profile.followersCount);
+
+    useEffect(() => {
+        setFollowersCount(profile.followersCount);
+        getFollow();
+    }, [profile.username]);
+
+
+    const followUser = async () =>{
+        try{
+            if(follow === true){
+                await axios.put('http://localhost:9999/api/v1/users/user/unFollow',
+                    {
+                    "firstUsername":username,
+                    "secondUsername":profile.username
+                })
+                setFollowersCount(prev => prev - 1);
+            }else{
+                await axios.put('http://localhost:9999/api/v1/users/user/follow',
+                    {
+                    "firstUsername":username,
+                    "secondUsername":profile.username
+                })
+                setFollowersCount(prev => prev + 1);
+            }
+            getFollow()
+        }catch(e){}
+    }
+
+    
+
     const v = '<'
     return(
         <div className="text-white flex flex-col">
@@ -25,7 +68,7 @@ function UserProfile({profile, getBack, username}) {
                             <div className="flex flex-row gap-3 mt-6 cursor-pointer" >
                                 <div className="flex flex-col">
                                     <p>Followers</p>
-                                    {profile.followersCount}
+                                    {followersCount}
                                 </div>
 
                                 <div className="flex flex-col cursor-pointer">
@@ -33,15 +76,13 @@ function UserProfile({profile, getBack, username}) {
                                     {profile.followingsCount}
                                 </div>
                             </div>
-
-                            <button className="bg-black text-xl font-light tracking-wider pl-6 pr-6 p-1 rounded-xl mt-6 hover:bg-gray-600 duration-500">
-                                Follow
+                            <button onClick={followUser} 
+                            className={`bg-black text-xl font-light tracking-wider pl-6 pr-6 p-1 rounded-xl mt-6 hover:bg-gray-600 duration-500 ${username === profile.username && `hidden`}`}>
+                                {follow === false ? <p>Follow</p> : <p>Unfollow</p>}
                             </button>
 
                             {username === profile.username ? <div className="pt-10 flex flex-row justify-start items-center gap-3 cursor-pointer">
-                                <p>
-                                    Settings
-                                </p>
+                                <p>Settings</p>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
                                     <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
                                 </svg>
@@ -49,10 +90,10 @@ function UserProfile({profile, getBack, username}) {
                             
                         </div>
                         <div className="flex flex-col">
-                            <ul className="flex flex-row flex-wrap overflow-auto scrollbar-hide">
+                            <ul className="flex flex-row flex-wrap overflow-auto scrollbar-hide" >
                             {profile.posts.map((post) => {
                                 return(    
-                                    <PostContent post={post} className={"flex flex-col max-w-[30%] m-[1%]"}/>
+                                    <PostContent key={post.id} post={post} className={"flex flex-col max-w-[30%] m-[1%]"}/>
                                     );
                                 })}
                             </ul>
