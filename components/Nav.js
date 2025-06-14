@@ -1,8 +1,13 @@
 
-function Nav(){
+function Nav({changeAside, aside}){
     return(
-        <nav className="h-[20vh] bg-[#0c0c0f] flex items-center">
+        <nav className="h-[15vh] bg-[#0c0c0f] flex items-center justify-between">
             <h1 className="text-8xl font-bold m-3 text-white">Trilly</h1>
+            <div className={`${aside && 'hidden'} flex justify-end p-3 cursor-pointer h-10`} onClick={(e) => changeAside(true)}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="white" class="bi bi-send-fill" viewBox="0 0 16 16">
+                    <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471z"/>
+                </svg>
+            </div>
         </nav>
     );
 }

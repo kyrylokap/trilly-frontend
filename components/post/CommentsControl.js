@@ -43,7 +43,7 @@ function CommentsControl({handleBack, postId, username, getProfile}){
                     {v}Back
                 </p>
             </div>
-            <ul className="overflow-y-auto  scrollbar-hide flex flex-col max-h-[250px]">
+            <ul className="max-h-[190px] overflow-y-auto scrollbar-hide">
                 
                 
                 {comments.map((comment) => {
@@ -79,8 +79,8 @@ function CommentsControl({handleBack, postId, username, getProfile}){
             }>
                 <input value={commentToSend} onChange={(e) => {
                     setComment(e.target.value)
-                }} className="w-[100%] rounded-lg p-1  outline-none placeholder:text-black" placeholder="Add comment..."/>
-                <button className="hidden">a</button>
+                }} className="w-full rounded-lg p-1  outline-none placeholder:text-black" placeholder="Add comment..."/>
+                <button className="hidden"></button>
             </form>
             
         </div>

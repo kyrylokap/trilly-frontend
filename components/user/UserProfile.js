@@ -1,8 +1,9 @@
-import { use, useState, useEffect } from "react";
-import PostContent from "../post/PostContent";
+import { useState, useEffect } from "react";
 import axios from 'axios'
+import UserProfilePost from "./UserProfilePost";
+import Post from "../post/Post";
 
-function UserProfile({profile, getBack, username}) {
+function UserProfile({profile, getBack, username, getProfile}) {
     const [follow, setFollow] = useState(false);
     const getFollow =  async() =>{
         try{
@@ -52,18 +53,18 @@ function UserProfile({profile, getBack, username}) {
             <p className=" cursor-pointer font-bold text-lg text-white flex flex-row items-center ml-4" onClick={getBack}>
                 {v}Back
             </p>
-                <div className="flex flex-row gap-8 m-8 ml-16 p-2">
+                <div className="flex flex-col gap-8 m-8 ml-16 p-2">
 
-                    <div className="flex flex-col">
-                        <svg xmlns="http://www.w3.org/2000/svg"  width="44" height="44" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-                            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
-                        </svg>
-                    </div>
-
-                    <div className="grid grid-flow-col ">
-                        <div className="flex flex-col mr-10">
+                    <div className="grid ">
+                        <div className="flex flex-row items-center gap-4">
+                            <svg xmlns="http://www.w3.org/2000/svg"  width="44" height="44" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+                            </svg>
                             <p>{profile.username}</p>
+                        </div>
+                        <div className="flex flex-col mr-10">
+                            
 
                             <div className="flex flex-row gap-3 mt-6 cursor-pointer" >
                                 <div className="flex flex-col">
@@ -77,7 +78,7 @@ function UserProfile({profile, getBack, username}) {
                                 </div>
                             </div>
                             <button onClick={followUser} 
-                            className={`bg-black text-xl font-light tracking-wider pl-6 pr-6 p-1 rounded-xl mt-6 hover:bg-gray-600 duration-500 ${username === profile.username && `hidden`}`}>
+                                className={`w-36 bg-black text-xl font-light tracking-wider pl-6 pr-6 p-1 rounded-xl mt-6 hover:bg-gray-600 duration-500 ${username === profile.username && `hidden`}`}>
                                 {follow === false ? <p>Follow</p> : <p>Unfollow</p>}
                             </button>
 
@@ -89,19 +90,17 @@ function UserProfile({profile, getBack, username}) {
                             </div> : <p></p>}
                             
                         </div>
-                        <div className="flex flex-col">
-                            <ul className="flex flex-row flex-wrap overflow-auto scrollbar-hide" >
-                            {profile.posts.map((post) => {
-                                return(    
-                                    <PostContent key={post.id} post={post} className={"flex flex-col max-w-[30%] m-[1%]"}/>
-                                    );
+                        
+                    </div>
+                    <div className="flex flex-col">
+                            <ul>
+                            {profile.posts.map((post) =>{
+                                return(<Post post={post} username={username} getProfile={getProfile}/>);
                                 })}
-                            </ul>
+                        </ul>
                 
                         </div> 
-                    </div>
-                    
-
+                                
                 </div>
                 
                    

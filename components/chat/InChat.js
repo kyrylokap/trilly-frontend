@@ -31,7 +31,7 @@ function InChat({selectedChatId, handleBack, username, chatMembers}){
     const sendMessage = async (e) => {
         e.preventDefault();
         try{
-            const response = await axios.post(
+            await axios.post(
                 "http://localhost:9999/api/v1/chats/"+ selectedChatId +"/messages",
                 {
                     "text": input,
@@ -54,7 +54,7 @@ function InChat({selectedChatId, handleBack, username, chatMembers}){
                 {v}Back
             </p>
         <h2 className="text-2xl font-semibold mb-4" > {chatMembers.filter((member) => member !== username).join(' ')}</h2>
-        <div className="bg-[#808080]  p-4 rounded-t-lg space-y-2  overflow-y-auto max-h-[470px] scrollbar-hide" ref={containerRef}>
+        <div className="bg-[#808080]  p-4 rounded-t-lg space-y-2  overflow-y-auto max-h-[540px] scrollbar-hide min-w-[340px]" ref={containerRef}>
             <ul className="space-y-2 flex-col ">
                 {messagesDTO.messages.map((message, index) => (
                     <Message key={index} message={message} time={messagesDTO.times[index]} sender={messagesDTO.senders[index]} username={username}/>

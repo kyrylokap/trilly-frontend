@@ -26,7 +26,6 @@ function PostInteraction({postId, username, setSelectedComments, post }){
                     <Comments setSelectedComments={setSelectedComments}/>
                 </div>
                 <div className="flex gap-4 whitespace-normal flex-wrap items-center">
-                    <p className="text-gray-300 p-0  font-thin pb-3">{post.username}</p>
                     <p className="text-white p-0 text-lg font-thin pb-3 break-words text-ellipsis">{post.description}</p>
                    
                 </div>

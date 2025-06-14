@@ -2,7 +2,7 @@
 function Message({message, time, sender, username}){
     return(
         <div className={`flex flex-col ${username === sender ? 'items-end' : 'items-start'}`}>
-             <li className="bg-zinc-800 p-3 w-fit  rounded-tl-2xl rounded-r-xl text-white">
+             <li className={`${username === sender ? "bg-zinc-800 rounded-l-xl  " : "bg-slate-600 rounded-r-xl"} text-white p-3 w-fit  rounded-t-xl  `}>
                 {message}
              </li>
              <div className="text-black text-sm flex items-center">
