@@ -54,7 +54,7 @@ function InChat({selectedChatId, handleBack, username, chatMembers}){
                 {v}Back
             </p>
         <h2 className="text-2xl font-semibold mb-4" > {chatMembers.filter((member) => member !== username).join(' ')}</h2>
-        <div className="bg-[#808080]  p-4 rounded-t-lg space-y-2  overflow-y-auto max-h-[540px] scrollbar-hide min-w-[340px]" ref={containerRef}>
+        <div className="bg-transparent p-4 rounded-t-lg space-y-2  overflow-y-auto max-h-[500px] scrollbar-hide border-2 border-[gray]" ref={containerRef}>
             <ul className="space-y-2 flex-col ">
                 {messagesDTO.messages.map((message, index) => (
                     <Message key={index} message={message} time={messagesDTO.times[index]} sender={messagesDTO.senders[index]} username={username}/>
@@ -62,7 +62,7 @@ function InChat({selectedChatId, handleBack, username, chatMembers}){
             </ul>
         </div>
         <form onSubmit={sendMessage}> 
-            <input placeholder="Type something..." value={input} onChange={(e) => setInput(e.target.value)} className="placeholder:text-white bg-[#18181a] outline-none text-lg  w-[100%] p-3 rounded-b-lg"/>
+            <input placeholder="Type something..." value={input} onChange={(e) => setInput(e.target.value)} className="placeholder:text-white bg-[#18181a] outline-none text-lg  w-full p-3 rounded-b-lg"/>
             <button  className='hidden'>aa</button>
         </form>
        

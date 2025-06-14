@@ -2,7 +2,7 @@
 
 function PostContent({post, getProfile, className}) {
     return(
-        <div key={post} className={`"ml-7 mt-7 text-white w-[60%] text-thin"`}>
+        <div key={post} className={`ml-7 mt-7 text-white w-[60%] text-thin`}>
             <div className="flex items-center mb-7 cursor-pointer gap-2">
                 <div className="flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg"  width="44" height="44" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
@@ -20,7 +20,7 @@ function PostContent({post, getProfile, className}) {
                 </div>
                 
             </div>
-            <img src={post.mediaUrl} alt="photo" className="min-w-full rounded-l-lg "/>
+            <img src={post.mediaUrl} className="w-full rounded-l-lg "/>
             
         </div>
     );

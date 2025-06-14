@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import PostContent from "./PostContent";
 import PostInteraction from "./PostInteraction";
-import Comments from "./CommentsControl";
+import CommentsControl from "./CommentsControl";
 
 function Post({post, getProfile, getBack, username}) {
 
@@ -13,15 +13,15 @@ function Post({post, getProfile, getBack, username}) {
     
 
     return(
-        <div className="flex flex-row max-h-[700px] pl-4">
+        <li className="flex flex-row pl-4 h-auto">
             <PostContent  post={post} getProfile={getProfile} getBack={getBack}/>
             
             {selectedComments === null ?
                 (<PostInteraction postId={post.postId} username={post.username} setSelectedComments={setSelectedComments} post={post}/>): 
-                (<Comments handleBack={handleBack} postId={post.postId} username={username} getProfile={getProfile}></Comments>)
+                (<CommentsControl handleBack={handleBack} postId={post.postId} username={username} getProfile={getProfile}></CommentsControl>)
             }
              
-        </div>
+        </li>
 
     );
 }

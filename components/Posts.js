@@ -32,7 +32,7 @@ function Posts({username, changeAside, aside}){
     }
 
     return(
-        <div className="h-[85vh] w-full bg-[#18181a]  overflow-auto scrollbar-hide">
+        <div className={`h-[85vh]  bg-[#18181a]  overflow-auto scrollbar-hide`}>
             
         
             <Search getProfile={getProfile} setUserProfile={setUserProfile}/>

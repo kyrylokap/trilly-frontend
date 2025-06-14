@@ -63,11 +63,11 @@ function UserProfile({profile, getBack, username, getProfile}) {
                             </svg>
                             <p>{profile.username}</p>
                         </div>
-                        <div className="flex flex-col mr-10">
+                        <div className="flex flex-col mr-10 ">
                             
 
                             <div className="flex flex-row gap-3 mt-6 cursor-pointer" >
-                                <div className="flex flex-col">
+                                <div className="flex flex-col ">
                                     <p>Followers</p>
                                     {followersCount}
                                 </div>
