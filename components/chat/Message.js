@@ -1,8 +1,8 @@
 
 function Message({message, time, sender, username}){
     return(
-        <div className={`flex flex-col ${username === sender ? 'items-end' : 'items-start'}`}>
-             <li className={`${username === sender ? "bg-zinc-800 rounded-l-xl  " : "bg-slate-600 rounded-r-xl"} text-white p-3 w-fit  rounded-t-xl break-all`}>
+        <div className={`flex flex-col ${username === sender ? 'items-end' : 'items-start'} `}>
+             <li className={`max-w-[50%] ${username === sender ? "bg-zinc-800 rounded-l-xl  " : "bg-slate-600 rounded-r-xl"} text-white p-3 w-fit  rounded-t-xl break-all`}>
                 {message}
              </li>
              <div className="text-white text-sm flex items-center">
@@ -16,7 +16,6 @@ function Message({message, time, sender, username}){
                     </svg>
                  </p> 
              </div>
-                        
         </div>
     );
 }

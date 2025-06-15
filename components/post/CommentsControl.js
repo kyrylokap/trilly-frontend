@@ -31,17 +31,17 @@ function CommentsControl({handleBack, postId, username, getProfile}){
     useEffect(() =>{
         getComments()
     }, [])
-    const v = '<'
     
     return(
-        <div className="pl-4 aspect-[4/3] border-[#2a2a2e] border-2 border-l-0 mt-[99px] rounded-r-xl p-5  flex flex-col justify-around w-[30%] ">
-               <div>
-                <p className="text-xl flex justify-center font-bold text-white text-[clamp(2px,1.5vw,30px)]">
+        <div className="pl-4 aspect-[4/3] border-[#2a2a2e] border-2 border-l-0 mt-[99px] rounded-r-xl p-5  flex flex-col justify-between w-[30%] ">
+               <div className="flex flex-row items-center ">
+                    <svg xmlns="http://www.w3.org/2000/svg" onClick={handleBack} className="cursor-pointer w-[clamp(1px,3vw,24px)] h-[clamp(1px,2vw,24px)]" fill="white" viewBox="0 0 16 16">
+                        <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+                    </svg>
+                <p className=" text-[clamp(2px,1.4vw,30px)] text-xl flex justify-center items-start font-bold text-white ">
                     Comments
                 </p>
-                <p className="text-white cursor-pointer font-bold text-lg  flex flex-row items-center text-[clamp(2px,1.5vw,30px)]" onClick={handleBack}>
-                    {v}Back
-                </p>
+                
             </div>
             <ul className=" overflow-y-auto scrollbar-hide  flex-1">
                 {comments.map((comment) => {
@@ -49,7 +49,7 @@ function CommentsControl({handleBack, postId, username, getProfile}){
                             <li key={comment.id} className=" flex-col font-extralight text-gray-500 m-0   break-all">
                                 <div className="flex gap-2 cursor-pointer align-center " onClick={() => getProfile(comment.username)}>
                                     <svg xmlns="http://www.w3.org/2000/svg"  fill="white" viewBox="0 0 16 16"
-                                        className="w-[clamp(1px,3vw,30px)] h-[clamp(1px,2vw,30px)] flex justify-center translate-y-2">
+                                        className="w-[clamp(1px,3vw,24px)] h-[clamp(1px,2vw,24px)] flex justify-center translate-y-2">
                                     <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
                                     </svg>
                                     <p key={comment.username} className="text-[clamp(2px,2.3vw,30px)] text-white flex text-center">
@@ -58,10 +58,10 @@ function CommentsControl({handleBack, postId, username, getProfile}){
                                     
                                 </div>
                                 <div>
-                                  <p className=" text-[clamp(2px,2.3vw,30px)] text-white  break-words flex align-center">
+                                  <p className=" text-[clamp(2px,2.3vw,24px)] text-white  break-words flex align-center">
                                     {comment.text}
                                   </p>
-                                  <p className="text-[clamp(2px,1.5vw,30px)]">
+                                  <p className="text-[clamp(2px,1.5vw,21px)]">
                                     {comment.commentTime}
                                   </p>  
                                 </div>

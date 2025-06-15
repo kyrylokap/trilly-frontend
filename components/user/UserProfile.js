@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import axios from 'axios'
-import UserProfilePost from "./UserProfilePost";
 import Post from "../post/Post";
 
 function UserProfile({profile, getBack, username, getProfile}) {
@@ -45,18 +44,15 @@ function UserProfile({profile, getBack, username, getProfile}) {
         }catch(e){}
     }
 
-    
 
-    const v = '<'
     return(
         <div className="text-white flex flex-col">
-            <p className=" cursor-pointer font-bold text-lg text-white flex flex-row items-center ml-4" onClick={getBack}>
-                {v}Back
-            </p>
-                <div className="flex flex-col gap-8 m-8 ml-16 p-2">
-
-                    <div className="grid ">
-                        <div className="flex flex-row items-center gap-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" onClick={getBack} className="ml-3 cursor-pointer w-[clamp(1px,3vw,24px)] h-[clamp(1px,2vw,24px)]" fill="white" viewBox="0 0 16 16">
+                        <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+                    </svg>
+                <div className="flex flex-col gap-8 p-2">
+                    <div className="ml-16" >
+                        <div className="flex flex-row items-center gap-4 ">
                             <svg xmlns="http://www.w3.org/2000/svg"  width="44" height="44" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
                                 <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
                                 <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
@@ -90,7 +86,6 @@ function UserProfile({profile, getBack, username, getProfile}) {
                             </div> : <p></p>}
                             
                         </div>
-                        
                     </div>
                     <div className="flex flex-col">
                             <ul>

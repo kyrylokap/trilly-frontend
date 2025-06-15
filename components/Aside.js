@@ -27,7 +27,8 @@ function Aside({username, changeAside}){
     })
     
   return (
-    <div className="absolute w-[40vw] right-0 top-0 h-[85vh] z-50 backdrop-blur-[10px] border-2 border-[#2a2a2e] overflow-auto scrollbar-hide p-4 min-w-[220px]">
+    <div className="right-0 fixed top-0 bottom-0 z-50 backdrop-blur-md p-4 overflow-auto w-screen border-2 border-[#2a2a2e] md:absolute md:right-0 md:top-0 md:h-[85vh] md:w-[40vw] md:min-w-[220px]">
+
       <motion.div
             key="aside"
             initial={{ x: 0,y: 100, opacity: 0 }}
@@ -46,7 +47,7 @@ function Aside({username, changeAside}){
       </p>
       <div className="flex flex-row items-center justify-center">
         <input
-          placeholder="Search someone..."
+          placeholder="Search in your chats..."
           className="border-b-2 m-4 p-2 pl-4 outline-none placeholder-white w-[70%] bg-transparent text-white font-thin placeholder:font-thin"
         />
       </div>
