@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import PostContent from "./PostContent";
 import PostInteraction from "./PostInteraction";
-import CommentsControl from "./CommentsControl";
+import CommentsControl from "./comments/CommentsControl";
 
 function Post({post, getProfile, getBack, username}) {
 

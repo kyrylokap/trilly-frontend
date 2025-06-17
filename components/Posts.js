@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Post from "./post/Post";
 import axios from 'axios'
-import UserProfile from "./user/UserProfile";
+import UserProfile from "./profile/UserProfile";
 import Search from "./Search";
 function Posts({username, changeAside, aside}){
 
@@ -33,8 +33,6 @@ function Posts({username, changeAside, aside}){
 
     return(
         <div className={`h-[85vh]  bg-[#18181a]  overflow-auto scrollbar-hide`}>
-            
-        
             <Search getProfile={getProfile} setUserProfile={setUserProfile}/>
             {profile === null ? 
                     (<div>
