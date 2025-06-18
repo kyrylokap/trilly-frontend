@@ -12,7 +12,7 @@ function Main(){
     return(
         <div className='w-[100vw] h-[100vh] select-none'>
             <Nav aside={aside} changeAside={changeAside}/>
-            <Content username={username} aside={aside} changeAside={changeAside}/>
+            <Content username={username} aside={aside} changeAside={changeAside} />
         </div>
     );
 }
