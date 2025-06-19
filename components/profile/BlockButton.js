@@ -1,11 +1,25 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function BlockButton({username, profileUsername}) {
 
-    const block = async () =>{
+    const [isBlocked, setIsBlocked] = useState(false);
+    const checkBlockStatus = async () => {
         try{
-            await axios.put("http://localhost:9999/api/v1/users/user/block",
+            const response = await axios.get("http://localhost:9999/api/v1/users/user/checkBlock",{
+                params:{
+                    username: username,
+                    profileUsername: profileUsername
+                }
+            })
+            setIsBlocked(response.data);
+        }catch(e){}
+    }
+
+    const changeBlockStatus = async () =>{
+        try{
+            checkBlockStatus();
+            await axios.put(`http://localhost:9999/api/v1/users/user/${isBlocked ? `unblock`: `block`}`,null,
                 {
                     params:{
                         username: username,
@@ -13,15 +27,20 @@ function BlockButton({username, profileUsername}) {
                     }
                 }
             )
+            setIsBlocked(!isBlocked);
         }
         catch(e){}
     }
 
 
+    useEffect(() => {
+        checkBlockStatus();
+    });
+
     return(
-        <button onClick={block}
+        <button onClick={changeBlockStatus}
                 className={`w-36 bg-black text-xl font-light tracking-wider pl-6 pr-6 p-1 rounded-xl mt-6 hover:bg-gray-600 duration-500 ${username === profileUsername && `hidden`}`}>
-                Block
+                {isBlocked ? `Unblock` : `Block`}
         </button>
     );
 }

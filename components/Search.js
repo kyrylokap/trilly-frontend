@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 
-function Search({getProfile, setUserProfile}){
+function Search({getProfile, setUserProfile, username}){
     const [inputValue, setInputValue] = useState('');
 
     const handleSubmit = async (e) =>{
@@ -13,14 +13,18 @@ function Search({getProfile, setUserProfile}){
 
     const [users, setUsers] = useState([]);
 
-    const loadUsers = async (username) => {
+    const loadUsers = async (usernameToFind) => {
         try{
-            if(username === ''){
+            if(usernameToFind === ''){
                 setUsers([])
                 setUserProfile(null)
             }
-            setInputValue(username)
-            const response = await axios.get(`http://localhost:9999/api/v1/users/${username}`);
+            setInputValue(usernameToFind)
+            const response = await axios.get(`http://localhost:9999/api/v1/users/${usernameToFind}`,{
+              params:{
+                username: username
+              }
+            });
             setUsers(response.data)
 
         }catch(e){}

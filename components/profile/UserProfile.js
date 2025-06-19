@@ -26,26 +26,6 @@ function UserProfile({profile, getBack, username, getProfile}) {
     }, [profile.username]);
 
 
-    const followUser = async () =>{
-        try{
-            if(follow === true){
-                await axios.put('http://localhost:9999/api/v1/users/user/unFollow',
-                    {
-                    "firstUsername":username,
-                    "secondUsername":profile.username
-                })
-                setFollowersCount(prev => prev - 1);
-            }else{
-                await axios.put('http://localhost:9999/api/v1/users/user/follow',
-                    {
-                    "firstUsername":username,
-                    "secondUsername":profile.username
-                })
-                setFollowersCount(prev => prev + 1);
-            }
-            getFollow()
-        }catch(e){}
-    }
 
 
     const [followings, setFollowings] = useState(false);
