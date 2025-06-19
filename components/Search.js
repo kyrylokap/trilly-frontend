@@ -37,7 +37,7 @@ function Search({getProfile, setUserProfile, username}){
                   <input placeholder="Search someone..." value={inputValue} onChange={(e) => loadUsers(e.target.value)}
                         className="border-[#2a2a2e] backdrop-blur bg-inherit outline-none p-3 border-2 w-full text-white placeholder:text-white font-thin pr-10"/>
                   <button type="submit" className="absolute right-2 top-1/2 -translate-y-1/2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" className="bi bi-search" viewBox="0 0 16 16">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" className="text-white hover:text-[gray] duration-300" fill="currentColor" viewBox="0 0 16 16">
                       <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
                     </svg>
                   </button>
@@ -50,7 +50,7 @@ function Search({getProfile, setUserProfile, username}){
                           getProfile(user.username);
                           setUsers([]);
                           setInputValue(user.username);
-                        }} className="font-thin text-white pl-3 p-2 cursor-pointer hover:bg-[#333]">
+                        }} className="font-thin text-white pl-3 p-2 cursor-pointer hover:bg-[#333] duration-300">
                         {user.username}
                       </li>
                     ))}

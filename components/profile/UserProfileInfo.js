@@ -40,12 +40,12 @@ function UserProfileInfo({profileUsername, showFollowers, followersCount, showFo
             <div className="flex flex-col mr-10 ">
                 <div className="flex flex-row gap-3 mt-6 cursor-pointer" >
                     <div className="flex flex-col " onClick={showFollowers}>
-                        <p>Followers</p>
+                        <p className="hover:text-[gray] duration-300">Followers</p>
                         {followersCount}
                     </div>
 
                     <div className="flex flex-col cursor-pointer" onClick={showFollowings}>
-                        <p>Followings</p>
+                        <p className="hover:text-[gray] duration-300">Followings</p>
                         {followingsCount}
                     </div>
                 </div>

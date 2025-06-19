@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Comment from "./Comment";
+import ExitButton from "../../ExitButton";
 
 function CommentsControl({handleBack, postId, username, getProfile}){
     const [commentToSend, setComment] = useState('');
@@ -35,14 +36,12 @@ function CommentsControl({handleBack, postId, username, getProfile}){
     return(
         <div className="pl-4 aspect-[4/3] border-[#2a2a2e] border-2 border-l-0 mt-[99px] rounded-r-xl p-5  flex flex-col justify-between w-[30%] ">
                <div className="flex flex-row items-center ">
-                    <svg xmlns="http://www.w3.org/2000/svg" onClick={handleBack} className="cursor-pointer w-[clamp(1px,3vw,24px)] h-[clamp(1px,2vw,24px)]" fill="white" viewBox="0 0 16 16">
-                        <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
-                    </svg>
+                <ExitButton getBack={handleBack}/>
                 <p className=" text-[clamp(2px,1.4vw,30px)] text-xl flex justify-center items-start font-bold text-white ">
                     Comments
                 </p>
-                
             </div>
+            
             <ul className=" overflow-y-auto scrollbar-hide  flex-1">
                 {comments.map((comment) => {
                     return <Comment comment={comment} getProfile={getProfile}/>;

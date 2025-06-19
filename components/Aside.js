@@ -4,7 +4,7 @@ import InChat from "./chat/InChat";
 import axios from 'axios'
 import { motion, AnimatePresence } from "framer-motion";
 import SearchChats from "./chat/SearchChats";
-
+import ExitButton from "./ExitButton";
 function Aside({username, changeAside, aside}){
   
 
@@ -45,20 +45,15 @@ function Aside({username, changeAside, aside}){
     
   return (
     <div className="scrollbar-hide  right-0 fixed top-0 bottom-0 z-50 backdrop-blur-md p-4 overflow-auto w-screen border-2 border-[#2a2a2e] md:absolute md:right-0 md:top-0 md:h-[85vh] md:w-[40vw] md:min-w-[220px]">
-
       <motion.div
-            key="aside"
-            initial={{ x: 200, y: 0, opacity: 0 }}
-            animate={{ x: 0,y: 0, opacity: 1 }}
-            exit={{ x: 100,y: 100, opacity: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-          >
-      <div onClick={(e) => changeAside(false)} className="cursor-pointer">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-x-lg" viewBox="0 0 16 16">
-          <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
-        </svg>
-      </div>
-      
+        key="aside"
+        initial={{ x: 200, y: 0, opacity: 0 }}
+        animate={{ x: 0,y: 0, opacity: 1 }}
+        exit={{ x: 100,y: 100, opacity: 0 }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}>
+
+      <ExitButton getBack={(e) => changeAside(false)}/>
+
       <p className="text-white font-semibold text-4xl pt-2 text-center">
         My chats
       </p>
