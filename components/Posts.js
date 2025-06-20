@@ -3,7 +3,7 @@ import Post from "./post/Post";
 import axios from 'axios'
 import UserProfile from "./profile/UserProfile";
 import Search from "./Search";
-function Posts({username, changeAside, aside}){
+function Posts({username, changeAside, aside, setSelectedChat}){
 
     const [posts, setPosts] = useState([]);
     
@@ -45,7 +45,7 @@ function Posts({username, changeAside, aside}){
                             That's all...
                         </h1>
                     </div>) :
-                 (<UserProfile profile={profile} getBack={getBack} username={username} getProfile={getProfile}/>)}
+                 (<UserProfile profile={profile} changeAside={changeAside} getBack={getBack} username={username} getProfile={getProfile} setSelectedChat={setSelectedChat}/>)}
             
                                 
         </div> 

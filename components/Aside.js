@@ -5,7 +5,7 @@ import axios from 'axios'
 import { motion, AnimatePresence } from "framer-motion";
 import SearchChats from "./chat/SearchChats";
 import ExitButton from "./ExitButton";
-function Aside({username, changeAside, aside}){
+function Aside({username, changeAside, aside, handleBack, setSelectedChat, selectedChat}){
   
 
     const [chats, setChats] = useState([])
@@ -21,8 +21,7 @@ function Aside({username, changeAside, aside}){
     };
 
     
-    const [selectedChat, setSelectedChat] = useState(null);
-    const handleBack = () => setSelectedChat(null);
+   
 
     useEffect(() =>{
         getUserChats();

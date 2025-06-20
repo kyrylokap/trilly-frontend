@@ -6,7 +6,7 @@ import UserProfileInfo from "./UserProfileInfo";
 import ChangePasswordForm from "./ChangePasswordForm";
 import ExitButton from '../ExitButton'
 
-function UserProfile({profile, getBack, username, getProfile}) {
+function UserProfile({profile, getBack, username, getProfile, setSelectedChat, changeAside}) {
     const [follow, setFollow] = useState(false);
     const getFollow =  async() =>{
         try{
@@ -58,9 +58,9 @@ function UserProfile({profile, getBack, username, getProfile}) {
                     <ExitButton getBack={getBack}/>
                     <div className="flex flex-col gap-8 p-2">
                         <div className="flex flex-row">
-                        <UserProfileInfo profileUsername={profile.username} showFollowers={showFollowers} followersCount={followersCount} 
+                        <UserProfileInfo changeAside={changeAside} profileUsername={profile.username} showFollowers={showFollowers} followersCount={followersCount} 
                             showFollowings={showFollowings} followingsCount={profile.followingsCount} username={username} follow={follow} 
-                            setFollowersCount={setFollowersCount} getFollow={getFollow} openSettings={openSettings} />
+                            setFollowersCount={setFollowersCount} getFollow={getFollow} openSettings={openSettings} setSelectedChat={setSelectedChat}/>
 
                     <ChangePasswordForm username={username} settings={settings}/>    
                         
@@ -70,10 +70,8 @@ function UserProfile({profile, getBack, username, getProfile}) {
                             {profile.posts.map((post) =>{
                                 return(<Post post={post} username={username} getProfile={getProfile}/>);
                                 })}
-                        </ul>
-                
+                            </ul>
                         </div> 
-                                
                 </div>
                 
                    
