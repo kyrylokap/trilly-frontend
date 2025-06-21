@@ -7,7 +7,7 @@ import OpenChatButton from "./OpenChatButton";
 
 function UserProfileInfo({profileUsername, showFollowers, followersCount, showFollowings, 
                         followingsCount, username, follow, setFollowersCount, 
-                        getFollow, openSettings, setSelectedChat,
+                        getFollow, setSelectedChat,
                         changeAside}) {
     
     const followUser = async () =>{
@@ -55,7 +55,7 @@ function UserProfileInfo({profileUsername, showFollowers, followersCount, showFo
                 <FollowButton username={username} profileUsername={profileUsername} followUser={followUser} follow={follow}/>
                 <BlockButton username={username} profileUsername={profileUsername}/>
                 <OpenChatButton username={username} profileUsername={profileUsername} setSelectedChat={setSelectedChat} changeAside={changeAside}/>
-                <SettingsButton username={username} profileUsername={profileUsername} openSettings={openSettings}/>
+                
             </div>
         </div>
     );

@@ -35,19 +35,18 @@ function Posts({username, changeAside, aside, setSelectedChat}){
         <div className={`h-[85vh]  bg-[#18181a]  overflow-auto scrollbar-hide`}>
             <Search getProfile={getProfile} setUserProfile={setUserProfile} username={username}/>
             {profile === null ? 
-                    (<div>
-                        <ul>
-                            {posts.map((post) =>{
-                                return(<Post post={post} getProfile={getProfile} username={username}/>);
-                                })}
-                        </ul>
-                        <h1 className="text-2xl mt-6 mb-3 text-white text-center">
-                            That's all...
-                        </h1>
-                    </div>) :
-                 (<UserProfile profile={profile} changeAside={changeAside} getBack={getBack} username={username} getProfile={getProfile} setSelectedChat={setSelectedChat}/>)}
-            
-                                
+                (<div>
+                    <ul>
+                        {posts.map((post) =>{
+                            return(<Post post={post} getProfile={getProfile} username={username}/>);
+                            })}
+                    </ul>
+                    <h1 className="text-2xl mt-6 mb-3 text-white text-center">
+                        That's all...
+                    </h1>
+                </div>) :
+                (<UserProfile profile={profile} changeAside={changeAside} 
+                    getBack={getBack} username={username} getProfile={getProfile} setSelectedChat={setSelectedChat}/>)}          
         </div> 
     );
 }

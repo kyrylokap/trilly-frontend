@@ -1,7 +1,7 @@
 import UserSvg from "./UserSvg";
 
 
-function Chats({chats, setSelectedChat, username}){
+function ChatsList({chats, setSelectedChat, username}){
     return(
         <ul className="ml-2 border-t">
           {chats.map((chat) => (
@@ -23,4 +23,4 @@ function Chats({chats, setSelectedChat, username}){
     );
 }
 
-export default Chats;
+export default ChatsList;

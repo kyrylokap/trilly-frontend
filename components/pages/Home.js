@@ -9,10 +9,16 @@ function Main(){
     const changeAside = async (e) => {
         setAside(e)
     }
+
+    const [settings, setSettings] = useState(false);
+    const openSettings = () =>{
+        setSettings(!settings);
+    }
+
     return(
         <div className='w-[100vw] h-[100vh] select-none'>
-            <Nav aside={aside} changeAside={changeAside}/>
-            <Content username={username} aside={aside} changeAside={changeAside} />
+            <Nav aside={aside} changeAside={changeAside} username={username} openSettings={openSettings} settings={settings}/>
+            <Content username={username} aside={aside} changeAside={changeAside} openSettings={openSettings} settings={settings}/>
         </div>
     );
 }
