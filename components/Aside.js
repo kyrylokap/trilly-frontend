@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import Chats from "../Chats";
+import Chats from "./chat/Chats";
 import axios from 'axios'
 import { motion } from "framer-motion";
 import ExitButton from "./ExitButton";
-import Settings from "../Settings";
+import Settings from "./settings/Settings";
 function Aside({username, changeAside, aside, handleBack, 
-      setSelectedChat, selectedChat, settings, openSettings, myProfile}){
+      setSelectedChat, selectedChat, settings, openSettings, setUserProfile}){
   
 
     const [chats, setChats] = useState([])
@@ -53,10 +53,8 @@ function Aside({username, changeAside, aside, handleBack,
         {settings === false ? 
           <Chats getSearchedChats={getSearchedChats} username={username} setSelectedChat={setSelectedChat} setSearchedChats={setSearchedChats} 
                             searchedChats={searchedChats} selectedChat={selectedChat} chats={chats} handleBack={handleBack}/> : 
-          <Settings username={username} myProfile={myProfile}/>
+          <Settings username={username} setUserProfile={setUserProfile}/>
         }
-        
-        
         </motion.div>
       </div>
   );

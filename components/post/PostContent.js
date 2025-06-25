@@ -1,13 +1,13 @@
 import UserSvg from "../UserSvg";
+import { getProfile } from "../../services/userProfileService";
 
-
-function PostContent({post, getProfile, className}) {
+function PostContent({post, className, setUserProfile}) {
     return(
         <div key={post} className={`ml-7 mt-7 text-white w-[60%] text-thin`}>
             <div className="flex items-center mb-7 cursor-pointer gap-2">
                 <div className="flex items-center hover:text-[gray] duration-200">
                     <UserSvg />
-                    <p className="ml-6 " onClick={() => getProfile(post.username)}>{post.username}</p>
+                    <p className="ml-6 " onClick={() => getProfile(post.username, setUserProfile)}>{post.username}</p>
                 </div>
                 <div className="flex items-center">
                    <svg className="ml-3" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">

@@ -1,4 +1,4 @@
-import UserSvg from "./UserSvg";
+import UserSvg from "../UserSvg";
 
 
 function ChatsList({chats, setSelectedChat, username}){

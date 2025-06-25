@@ -1,7 +1,6 @@
 import axios from "axios";
 
 import BlockButton from "./BlockButton";
-import SettingsButton from "./SettingsButton";
 import FollowButton from "./FollowButton";
 import OpenChatButton from "./OpenChatButton";
 

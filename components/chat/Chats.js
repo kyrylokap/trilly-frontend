@@ -1,6 +1,6 @@
-import ChatsList from "./components/ChatsList";
-import InChat from "./components/chat/InChat";
-import SearchChats from "./components/chat/SearchChats";
+import ChatsList from "./ChatsList";
+import InChat from "./InChat";
+import SearchChats from "./SearchChats";
 
 export default function Chats({getSearchedChats, username, setSelectedChat, setSearchedChats, 
                             searchedChats, selectedChat, chats, handleBack}){

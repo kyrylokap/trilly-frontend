@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-function UserList({choose, username, close, getProfile}) {
+import { getProfile } from "../../services/userProfileService";
+
+function UserList({choose, username, close, setUserProfile}) {
     const [users, setUsers] = useState([]);
 
     const getUsers = async () => {
@@ -41,7 +43,7 @@ function UserList({choose, username, close, getProfile}) {
                   {users.length > 0 ? (
                     users.map((user) => (
                       <li key={user.id || user.username} onClick={() =>{
-                            getProfile(user.username);
+                            getProfile(user.username, setUserProfile);
                             close();
                         }}
                         className="flex items-center justify-between p-3 rounded-lg shadow-sm  hover:shadow-xl transition cursor-pointer">

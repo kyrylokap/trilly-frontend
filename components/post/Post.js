@@ -4,7 +4,7 @@ import PostContent from "./PostContent";
 import PostInteraction from "./PostInteraction";
 import CommentsControl from "./comments/CommentsControl";
 
-function Post({post, getProfile, getBack, username}) {
+function Post({post, getBack, username, setUserProfile}) {
 
 
     const [selectedComments, setSelectedComments] = useState(null);
@@ -14,11 +14,11 @@ function Post({post, getProfile, getBack, username}) {
 
     return(
         <li className="flex flex-row pl-4 h-auto">
-            <PostContent  post={post} getProfile={getProfile} getBack={getBack}/>
+            <PostContent  post={post} setUserProfile={setUserProfile} getBack={getBack}/>
             
             {selectedComments === null ?
                 (<PostInteraction postId={post.postId} username={post.username} setSelectedComments={setSelectedComments} post={post}/>): 
-                (<CommentsControl handleBack={handleBack} postId={post.postId} username={username} getProfile={getProfile}></CommentsControl>)
+                (<CommentsControl handleBack={handleBack} postId={post.postId} username={username} setUserProfile={setUserProfile}></CommentsControl>)
             }
              
         </li>

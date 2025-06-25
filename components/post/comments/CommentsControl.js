@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Comment from "./Comment";
 import ExitButton from "../../ExitButton";
 
-function CommentsControl({handleBack, postId, username, getProfile}){
+function CommentsControl({handleBack, postId, username, setUserProfile}){
     const [commentToSend, setComment] = useState('');
 
     const [comments,setComments] = useState([]);
@@ -44,7 +44,7 @@ function CommentsControl({handleBack, postId, username, getProfile}){
             
             <ul className=" overflow-y-auto scrollbar-hide  flex-1">
                 {comments.map((comment) => {
-                    return <Comment comment={comment} getProfile={getProfile}/>;
+                    return <Comment comment={comment} setUserProfile={setUserProfile}/>;
                 })}
             </ul> 
         

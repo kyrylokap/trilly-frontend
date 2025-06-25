@@ -1,12 +1,13 @@
 import axios from "axios";
 import { useState } from "react";
+import { getProfile } from "../services/userProfileService";
 
-function Search({getProfile, setUserProfile, username}){
+function Search({setUserProfile, username}){
     const [inputValue, setInputValue] = useState('');
 
     const handleSubmit = async (e) =>{
         e.preventDefault();
-        getProfile(inputValue);
+        getProfile(inputValue, setUserProfile);
         setInputValue("")
         setUsers([])
     }
@@ -47,7 +48,7 @@ function Search({getProfile, setUserProfile, username}){
                   <ul className="absolute top-full left-0 z-10 max-h-60 overflow-y-auto w-full flex flex-col rounded-b-md backdrop-blur border-2 border-[#2a2a2e]">
                     {users.map((user) => (
                       <li key={user.username} onClick={() => {
-                          getProfile(user.username);
+                          getProfile(user.username, setUserProfile);
                           setUsers([]);
                           setInputValue(user.username);
                         }} className="font-thin text-white pl-3 p-2 cursor-pointer hover:bg-[#333] duration-300">

@@ -1,8 +1,9 @@
-import ChangePasswordForm from './components/profile/ChangePasswordForm';
+import ChangePasswordForm from './ChangePasswordForm'
 import { useState } from 'react';
-import ChangeUsernameForm from './components/profile/ChangeUsernameForm';
+import ChangeUsernameForm from './ChangeUsernameForm';
+import { getProfile } from '../../services/userProfileService';
 
-function Settings({username, myProfile}){
+function Settings({username, setUserProfile}){
 
     const [changePasswordBlock, setChangePasswordBlock] = useState(false);
     const useChangePassword = () => {
@@ -14,9 +15,7 @@ function Settings({username, myProfile}){
         setChangeUsernameBlock(prev => !prev);
     }
 
-
     return(
-        
         <div>
             {changeUsernameBlock === false ?
             <div>
@@ -30,7 +29,7 @@ function Settings({username, myProfile}){
                     <li onClick={useChangeUsername} className="p-2 font-medium text-2xl border hover:bg-white hover:text-black duration-300 text-center cursor-pointer rounded-lg">
                         <p>Change username</p>
                     </li>
-                    <li onClick={() => myProfile(username)} className="p-2 font-medium text-2xl border hover:bg-white hover:text-black duration-300 text-center cursor-pointer rounded-lg">
+                    <li onClick={() => getProfile(username, setUserProfile)} className="p-2 font-medium text-2xl border hover:bg-white hover:text-black duration-300 text-center cursor-pointer rounded-lg">
                         <p>My profile</p>
                     </li>
                 </ul>
