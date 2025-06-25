@@ -2,7 +2,7 @@ import ChangePasswordForm from './components/profile/ChangePasswordForm';
 import { useState } from 'react';
 import ChangeUsernameForm from './components/profile/ChangeUsernameForm';
 
-function Settings({username}){
+function Settings({username, myProfile}){
 
     const [changePasswordBlock, setChangePasswordBlock] = useState(false);
     const useChangePassword = () => {
@@ -13,7 +13,6 @@ function Settings({username}){
     const useChangeUsername = () => {
         setChangeUsernameBlock(prev => !prev);
     }
-
 
 
     return(
@@ -30,6 +29,9 @@ function Settings({username}){
                     </li>
                     <li onClick={useChangeUsername} className="p-2 font-medium text-2xl border hover:bg-white hover:text-black duration-300 text-center cursor-pointer rounded-lg">
                         <p>Change username</p>
+                    </li>
+                    <li onClick={() => myProfile(username)} className="p-2 font-medium text-2xl border hover:bg-white hover:text-black duration-300 text-center cursor-pointer rounded-lg">
+                        <p>My profile</p>
                     </li>
                 </ul>
             </div>:

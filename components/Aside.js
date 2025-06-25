@@ -4,7 +4,8 @@ import axios from 'axios'
 import { motion } from "framer-motion";
 import ExitButton from "./ExitButton";
 import Settings from "../Settings";
-function Aside({username, changeAside, aside, handleBack, setSelectedChat, selectedChat, settings, openSettings}){
+function Aside({username, changeAside, aside, handleBack, 
+      setSelectedChat, selectedChat, settings, openSettings, myProfile}){
   
 
     const [chats, setChats] = useState([])
@@ -40,7 +41,7 @@ function Aside({username, changeAside, aside, handleBack, setSelectedChat, selec
 
     
     return (
-      <div className="scrollbar-hide  right-0 fixed top-0 bottom-0 z-50 backdrop-blur-md p-4 overflow-auto w-screen border-2 border-[#2a2a2e] md:absolute md:right-0 md:top-0 md:h-[85vh] md:w-[40vw] md:min-w-[220px]">
+      <div className="scrollbar-hide  right-0 fixed top-0 bottom-0 z-20 backdrop-blur-md p-4 overflow-auto w-screen border-2 border-[#2a2a2e] md:absolute md:right-0 md:top-0 md:h-[85vh] md:w-[40vw] md:min-w-[220px]">
         <motion.div
           key="aside"
           initial={{ x: 200, y: 0, opacity: 0 }}
@@ -52,7 +53,7 @@ function Aside({username, changeAside, aside, handleBack, setSelectedChat, selec
         {settings === false ? 
           <Chats getSearchedChats={getSearchedChats} username={username} setSelectedChat={setSelectedChat} setSearchedChats={setSearchedChats} 
                             searchedChats={searchedChats} selectedChat={selectedChat} chats={chats} handleBack={handleBack}/> : 
-          <Settings username={username}/>
+          <Settings username={username} myProfile={myProfile}/>
         }
         
         

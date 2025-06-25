@@ -3,7 +3,7 @@ import Post from "./post/Post";
 import axios from 'axios'
 import UserProfile from "./profile/UserProfile";
 import Search from "./Search";
-function Posts({username, changeAside, aside, setSelectedChat}){
+function Posts({username, changeAside, aside, setSelectedChat,profile, setUserProfile, getProfile}){
 
     const [posts, setPosts] = useState([]);
     
@@ -18,14 +18,9 @@ function Posts({username, changeAside, aside, setSelectedChat}){
         loadPosts()
     }, [username])
 
-    const [profile, setUserProfile] = useState(null);
     
-    const getProfile = async (profileUsername) =>{
-        try{
-            const response = await axios.get("http://localhost:9999/api/v1/user/" + profileUsername)
-            setUserProfile(response.data)
-        }catch(e){}
-    }
+    
+    
 
     const getBack = async () =>{
         setUserProfile(null)
@@ -45,6 +40,7 @@ function Posts({username, changeAside, aside, setSelectedChat}){
                         That's all...
                     </h1>
                 </div>) :
+
                 (<UserProfile profile={profile} changeAside={changeAside} 
                     getBack={getBack} username={username} getProfile={getProfile} setSelectedChat={setSelectedChat}/>)}          
         </div> 

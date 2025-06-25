@@ -40,7 +40,7 @@ export default function ChangeUsernameForm({username, useChangeUsername}) {
                 </div>
                 <input value={providedUsername} onChange={(e) => changeUsername(e.target.value)} placeholder={`New username`} className="outline-none  p-0.5 bg-transparent border-b-[1px] text-white" />
                 <button type="submit" className="bg-black text-white p-2 rounded-xl hover:bg-[gray] duration-500">Change</button>
-                <p  className="break-words text-white">{responseMSG}</p>
+                <p className="break-words text-white">{responseMSG}</p>
             </form>
             
         </div>
