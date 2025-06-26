@@ -19,9 +19,6 @@ function Posts({username, changeAside, aside, setSelectedChat,profile, setUserPr
     }, [username])
 
     
-    
-    
-
     const getBack = async () =>{
         setUserProfile(null)
     }
@@ -33,7 +30,7 @@ function Posts({username, changeAside, aside, setSelectedChat,profile, setUserPr
                 (<div>
                     <ul>
                         {posts.map((post) =>{
-                            return(<Post post={post} setUserProfile={setUserProfile} username={username}/>);
+                            return(<Post key={post.postId} post={post} setUserProfile={setUserProfile} username={username}/>);
                             })}
                     </ul>
                     <h1 className="text-2xl mt-6 mb-3 text-white text-center">

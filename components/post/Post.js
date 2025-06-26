@@ -13,7 +13,7 @@ function Post({post, getBack, username, setUserProfile}) {
     
 
     return(
-        <li className="flex flex-row pl-4 h-auto">
+        <li className="flex flex-row pl-4 h-auto" >
             <PostContent  post={post} setUserProfile={setUserProfile} getBack={getBack}/>
             
             {selectedComments === null ?

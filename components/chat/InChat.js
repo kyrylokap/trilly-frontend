@@ -4,7 +4,7 @@ import ExitButton from '../ExitButton';
 import { sendMessage, getMessages } from '../../services/inChatService';
 
 
-function InChat({selectedChatId, handleBack, username, chatMembers}){
+function InChat({selectedChatId, handleBack, username, chatMembers, refreshChats}){
     const [messagesDTO, setMessages] = useState({ messages: [], times: [], senders:[] })
     const [input, setInput] = useState('')
     const containerRef = useRef(null);
@@ -37,7 +37,9 @@ function InChat({selectedChatId, handleBack, username, chatMembers}){
                     ))}
                 </ul>
             </div>
-            <form onSubmit={(e) => sendMessage(e, selectedChatId, input, username, setInput, setMessages)}> 
+            <form onSubmit={async (e) => {
+                await sendMessage(e, selectedChatId, input, username, setInput, setMessages);
+                refreshChats();}}> 
                 <input placeholder="Type something..." value={input} onChange={(e) => setInput(e.target.value)} className="placeholder:text-white bg-transparent border-2 border-[gray] outline-none text-lg  w-full p-3 rounded-b-lg"/>
                 <button  className='hidden'></button>
             </form>

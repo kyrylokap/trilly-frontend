@@ -3,7 +3,7 @@ import InChat from "./InChat";
 import SearchChats from "./SearchChats";
 
 export default function Chats({getSearchedChats, username, setSelectedChat, setSearchedChats, 
-                            searchedChats, selectedChat, chats, handleBack}){
+                            searchedChats, selectedChat, chats, handleBack, refreshChats}){
                                 
     return(
         <div>
@@ -20,7 +20,7 @@ export default function Chats({getSearchedChats, username, setSelectedChat, setS
         
         {selectedChat === null ? 
           (<ChatsList chats={chats} setSelectedChat={setSelectedChat} usernamme={username}/>): 
-          (<InChat selectedChatId={selectedChat.chatId} handleBack={handleBack} username={username} chatMembers={selectedChat.usernames}/>)
+          (<InChat selectedChatId={selectedChat.chatId} handleBack={handleBack} username={username} chatMembers={selectedChat.usernames} refreshChats={refreshChats}/>)
         }
         </div>
     );

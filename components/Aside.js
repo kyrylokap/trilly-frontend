@@ -12,7 +12,7 @@ function Aside({username, changeAside, aside, handleBack,
     const getUserChats = async () => {
         try{
             const response = await axios.get(
-                "http://localhost:9999/api/v1/users/"+ username +"/chats"
+                "http://localhost:9999/api/v1/users/"+ username + "/chats"
             )
             setChats(response.data)
             console.log(response.data)
@@ -22,7 +22,7 @@ function Aside({username, changeAside, aside, handleBack,
 
     useEffect(() =>{
         getUserChats();
-    })
+    },[username])
 
     const [searchedChats, setSearchedChats] = useState([]);
 
@@ -52,7 +52,7 @@ function Aside({username, changeAside, aside, handleBack,
         <ExitButton getBack={settings === false ? (e) => changeAside(false) : openSettings}/>
         {settings === false ? 
           <Chats getSearchedChats={getSearchedChats} username={username} setSelectedChat={setSelectedChat} setSearchedChats={setSearchedChats} 
-                            searchedChats={searchedChats} selectedChat={selectedChat} chats={chats} handleBack={handleBack}/> : 
+                            searchedChats={searchedChats} selectedChat={selectedChat} chats={chats} handleBack={handleBack} refreshChats={getUserChats}/> : 
           <Settings username={username} setUserProfile={setUserProfile}/>
         }
         </motion.div>
