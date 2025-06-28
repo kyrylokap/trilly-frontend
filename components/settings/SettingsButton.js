@@ -4,7 +4,7 @@
     
     return(
         <div>
-            <div onClick={openSettings} className="pt-10 flex flex-row justify-start items-center gap-3 cursor-pointer group -translate-y-5">
+            <div onClick={openSettings} className="pt-10 flex  justify-start items-center gap-1 cursor-pointer group -translate-y-5">
                 <p className="group-hover:text-[gray] duration-200 text-transparent">Settings</p>
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" 
                     className="text-white group-hover:text-[gray] duration-200"
