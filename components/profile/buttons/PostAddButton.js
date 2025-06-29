@@ -1,10 +1,8 @@
 
 
-export default function PostAddButton({username}){
-    //TODO
+export default function PostAddButton({username, addPost}){
     return(
-        <div className="flex justify-center  items-center group gap-1 cursor-pointer">
-            
+        <div className="flex justify-center  items-center group gap-1 cursor-pointer" onClick={() => addPost(true)}>
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" 
             className="group-hover:text-[gray] duration-200 text-white cursor-pointer   "
             viewBox="0 0 16 16">

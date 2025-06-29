@@ -1,8 +1,8 @@
 
 
-import BlockButton from "./BlockButton";
-import FollowButton from "./FollowButton";
-import OpenChatButton from "./OpenChatButton";
+import BlockButton from "./buttons/BlockButton";
+import FollowButton from "./buttons/FollowButton";
+import OpenChatButton from "./buttons/OpenChatButton";
 
 function UserProfileInfo({profileUsername, showFollowers, followersCount, showFollowings, 
                         followingsCount, username, follow, setFollowersCount, 

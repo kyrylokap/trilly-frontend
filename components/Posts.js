@@ -3,20 +3,16 @@ import Post from "./post/Post";
 import { loadPosts } from "../services/postService";
 import UserProfile from "./profile/UserProfile";
 import Search from "./Search";
+import AddPost from "./profile/AddPost";
 function Posts({username, changeAside, aside, setSelectedChat,profile, setUserProfile}){
 
     const [posts, setPosts] = useState([]);
     
-    
-
     useEffect(() => {
         loadPosts(setPosts)
     }, [username])
 
-    
-    const getBack = async () =>{
-        setUserProfile(null)
-    }
+    const getBack = async () => setUserProfile(null);
 
     return(
         <div className={`h-[85vh]  bg-[#18181a]  overflow-auto scrollbar-hide`}>

@@ -1,4 +1,4 @@
-import { openChat } from "../../services/chatService";
+import { openChat } from "../../../services/chatService";
 
 
 function OpenChatButton({username, profileUsername, setSelectedChat, changeAside}){

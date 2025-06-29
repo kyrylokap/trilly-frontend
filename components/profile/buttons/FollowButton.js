@@ -1,4 +1,4 @@
-import { followUser } from "../../services/userProfileService";
+import { followUser } from "../../../services/userProfileService";
 
 function FollowButton({follow, username, profileUsername, setFollowersCount, getFollow}) {
     return(

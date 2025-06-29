@@ -14,3 +14,14 @@ export const loadPosts = async (setPosts) => {
         setPosts(response.data)
     }catch(e){}
 }
+
+export const post = async (username, place, mediaUrl, description) => {
+    try{
+        await axios.post(`http://localhost:9999/api/v1/users/${username}/post`,{
+            place: place,
+            mediaUrl: mediaUrl,
+            description: description
+        }); 
+    }
+    catch(e){}
+}

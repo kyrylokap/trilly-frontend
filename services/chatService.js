@@ -4,7 +4,7 @@ const url = "http://localhost:9999/api/v1/";
 
 export const openChat = async (username, profileUsername, setSelectedChat, changeAside) =>{
     try{
-        const response = await axios.get(`${url}/getChat`, {
+        const response = await axios.get(`${url}users/getChat`, {
             params:{
                 firstUsername: username,
                 secondUsername: profileUsername

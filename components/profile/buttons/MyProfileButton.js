@@ -1,4 +1,4 @@
-import { getProfile } from "../../services/userProfileService";
+import { getProfile } from "../../../services/userProfileService";
 
 export default function MyProfileButton({username, setUserProfile}){
     
