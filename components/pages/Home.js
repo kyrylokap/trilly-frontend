@@ -11,14 +11,16 @@ function Main(){
     }
 
     const [settings, setSettings] = useState(false);
-    const openSettings = () =>{
-        setSettings(!settings);
+    const openSettings = (e) =>{
+        setSettings(e);
     }
 
+    
+    const [profile, setUserProfile] = useState(null);
     return(
         <div className='w-[100vw] h-[100vh] select-none'>
-            <Nav aside={aside} changeAside={changeAside} username={username} openSettings={openSettings} settings={settings}/>
-            <Content username={username} aside={aside} changeAside={changeAside} openSettings={openSettings} settings={settings}/>
+            <Nav aside={aside} changeAside={changeAside} username={username} openSettings={openSettings} settings={settings} setUserProfile={setUserProfile} />
+            <Content aside={aside} changeAside={changeAside} username={username} openSettings={openSettings} settings={settings} profile={profile} setUserProfile={setUserProfile}/>
         </div>
     );
 }

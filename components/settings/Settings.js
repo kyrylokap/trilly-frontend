@@ -1,7 +1,6 @@
 import ChangePasswordForm from './ChangePasswordForm'
 import { useState } from 'react';
 import ChangeUsernameForm from './ChangeUsernameForm';
-import { getProfile } from '../../services/userProfileService';
 
 function Settings({username, setUserProfile}){
 
@@ -29,9 +28,7 @@ function Settings({username, setUserProfile}){
                     <li onClick={useChangeUsername} className="p-2 font-medium text-2xl border hover:bg-white hover:text-black duration-300 text-center cursor-pointer rounded-lg">
                         <p>Change username</p>
                     </li>
-                    <li onClick={() => getProfile(username, setUserProfile)} className="p-2 font-medium text-2xl border hover:bg-white hover:text-black duration-300 text-center cursor-pointer rounded-lg">
-                        <p>My profile</p>
-                    </li>
+                    
                 </ul>
             </div>:
             <ChangePasswordForm username={username} useChangePassword={useChangePassword} />}

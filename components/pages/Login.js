@@ -9,7 +9,7 @@ function Login(){
         <div className="flex flex-col items-center h-[100vh] justify-center bg-[#18181a]">
             <div className="bg-[#0c0c0f] flex flex-col pb-8 pt-16 rounded-xl p-4">
 
-                <form className='flex flex-col'>
+                <form className='flex flex-col pt-1 pb-1'>
                     <h1 className="text-5xl text-center font-bold text-white">Log in</h1>
                     <p className="ml-6 text-white mt-3 ">Username</p>
                     <input  className="outline-none m-5 p-1 rounded-xl mt-0"/>
@@ -20,7 +20,7 @@ function Login(){
                     </Link>
                     
                     
-                    <div className="flex flex-row justify-center" >
+                    <div className="flex flex-row justify-center">
                         <button className="w-32 m-2 p-2  bg-black text-white rounded-lg border-none">Log in</button> 
                         <Link to={"/register"}>
                             <button className="w-32 m-2 p-2 border-none bg-white text-black rounded-lg">Register</button> 
