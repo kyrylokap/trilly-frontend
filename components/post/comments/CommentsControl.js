@@ -1,36 +1,19 @@
-import axios from "axios";
+
 import { useState, useEffect } from "react";
 import Comment from "./Comment";
 import ExitButton from "../../ExitButton";
+import { getComments, sendComment } from "../../../services/commentsService";
 
 function CommentsControl({handleBack, postId, username, setUserProfile}){
     const [commentToSend, setComment] = useState('');
 
     const [comments,setComments] = useState([]);
 
-    const getComments = async () => {
-        try{
-            const response = await axios.get('http://localhost:9999/api/v1/posts/'+ postId + '/comments')
-            setComments(response.data)
-        }
-        catch(e){}
-    }
+    
 
-    const sendComment = async () => {
-        try{
-            await axios.post(`http://localhost:9999/api/v1/posts/${postId}/comment`,
-                {
-                    "username": username,
-                    "text": commentToSend
-                }
-            )
-            getComments()
-            setComment('')
-        }
-        catch(e){}
-    }
+    
     useEffect(() =>{
-        getComments()
+        getComments(setComments, postId);
     }, [])
     
     return(
@@ -48,7 +31,8 @@ function CommentsControl({handleBack, postId, username, setUserProfile}){
                 })}
             </ul> 
         
-            <form onSubmit={(e) => {e.preventDefault();sendComment();}}>
+            <form onSubmit={(e) => {e.preventDefault();
+                                    sendComment(username, commentToSend, postId, setComment, setComments);}}>
                 <input value={commentToSend} onChange={(e) => {
                     setComment(e.target.value)
                 }} className="w-full rounded-lg px-2 py-[clamp(2px,0.4vw,10px)]  text-black

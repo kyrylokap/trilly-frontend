@@ -1,27 +1,18 @@
-import axios from "axios";
+
 import { useState } from "react";
 import Likes from "./postInteractionMembers/Likes";
 import Shares from "./postInteractionMembers/Shares";
 import Comments from "./postInteractionMembers/Comments";
+import { likePost } from "../../services/postService";
 
 function PostInteraction({postId, username, setSelectedComments, post }){
 
     const [like, setLike] = useState(false);
     
-    const likePost = async () => {
-        try{
-            const response = await axios.post(`http://localhost:9999/api/v1/users/${postId}/${username}`);
-            setLike(response.data)
-        }
-        catch(e){}
-    }
-
-    
-
     return(
             <div className="w-[30%] pl-3 pt-6 select-none font-thin flex flex-col  border-[#2a2a2e] border-2 border-l-0 mt-[99px] rounded-r-xl ">
                 <div className="text-[1.2vw]">
-                    <Likes  likePost={likePost} post={post} like={like} />
+                    <Likes  likePost={() => likePost(setLike, postId, username)} post={post} like={like} />
                     <Shares />
                     <Comments setSelectedComments={setSelectedComments}/>
                 </div>

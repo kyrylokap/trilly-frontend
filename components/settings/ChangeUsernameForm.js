@@ -1,7 +1,6 @@
 import { useState } from "react";
-import axios from "axios";
 import ExitButton from "../ExitButton";
-
+import { changeUsernameRequest } from "../../services/settingsService";
 export default function ChangeUsernameForm({username, useChangeUsername}) {
     
     const [providedUsername, setProvidedUsername] = useState("");
@@ -11,21 +10,7 @@ export default function ChangeUsernameForm({username, useChangeUsername}) {
 
     const [responseMSG, setResponseMSG] = useState("");
 
-    const changeUsernameRequest = async (e) => {
-        try{
-            e.preventDefault();
-            const responseMessage = await axios.put("http://localhost:9999/api/v1/user/changeUsername", null,
-                {
-                    params:{
-                        oldUsername: username,
-                        newUsername: providedUsername
-                    }
-                }
-            ) 
-            setResponseMSG(responseMessage.data);
-        }
-        catch(e){}
-    }
+   
    
 
     return(
@@ -34,7 +19,7 @@ export default function ChangeUsernameForm({username, useChangeUsername}) {
                 Change username
             </p>
 
-            <form className="flex flex-col gap-16 bg-zinc-800 p-14 rounded-md min-w-[50%] max-w-[50%]" onSubmit={(e) => changeUsernameRequest(e)}>
+            <form className="flex flex-col gap-16 bg-zinc-800 p-14 rounded-md min-w-[50%] max-w-[50%]" onSubmit={(e) => changeUsernameRequest(e,username, providedUsername, setResponseMSG)}>
                 <div className="flex justify-end">
                     <ExitButton getBack={useChangeUsername}/>
                 </div>

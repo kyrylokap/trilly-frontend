@@ -2,9 +2,9 @@ import Message from './Message'
 import { useState, useEffect ,useRef} from "react";
 import ExitButton from '../ExitButton';
 import { sendMessage, getMessages } from '../../services/inChatService';
+import { getUserChats } from '../../services/chatService';
 
-
-function InChat({selectedChatId, handleBack, username, chatMembers, refreshChats}){
+function InChat({selectedChatId, handleBack, username, chatMembers, setChats}){
     const [messagesDTO, setMessages] = useState({ messages: [], times: [], senders:[] })
     const [input, setInput] = useState('')
     const containerRef = useRef(null);
@@ -39,7 +39,7 @@ function InChat({selectedChatId, handleBack, username, chatMembers, refreshChats
             </div>
             <form onSubmit={async (e) => {
                 await sendMessage(e, selectedChatId, input, username, setInput, setMessages);
-                refreshChats();}}> 
+                getUserChats(username, setChats);}}> 
                 <input placeholder="Type something..." value={input} onChange={(e) => setInput(e.target.value)} className="placeholder:text-white bg-transparent border-2 border-[gray] outline-none text-lg  w-full p-3 rounded-b-lg"/>
                 <button  className='hidden'></button>
             </form>

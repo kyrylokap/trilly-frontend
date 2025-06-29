@@ -1,21 +1,16 @@
 import { useEffect, useState } from "react";
 import Post from "./post/Post";
-import axios from 'axios'
+import { loadPosts } from "../services/postService";
 import UserProfile from "./profile/UserProfile";
 import Search from "./Search";
 function Posts({username, changeAside, aside, setSelectedChat,profile, setUserProfile}){
 
     const [posts, setPosts] = useState([]);
     
-    const loadPosts = async () => {
-        try{
-            const response = await axios.get("http://localhost:9999/api/v1/users/posts")
-            setPosts(response.data)
-        }catch(e){}
-    }
+    
 
     useEffect(() => {
-        loadPosts()
+        loadPosts(setPosts)
     }, [username])
 
     

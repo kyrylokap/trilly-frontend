@@ -1,29 +1,15 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { getProfile } from "../../services/userProfileService";
+import { getUsers } from "../../services/userListService";
 
 function UserList({choose, username, close, setUserProfile}) {
     const [users, setUsers] = useState([]);
 
-    const getUsers = async () => {
-        try {
-            const endpoint = choose
-                ? "http://localhost:9999/api/v1/users/user/followings"
-                : "http://localhost:9999/api/v1/users/user/followers";
-
-            const response = await axios.get(endpoint, {
-                params: { username }
-            });
-
-            setUsers(response.data);
-        } catch (e) {
-            console.error("Failed to fetch users:", e);
-        }
-    }
+    
     
 
     useEffect(() =>{
-        getUsers();
+        getUsers(choose, username, setUsers);
     },[choose, username])
 
 

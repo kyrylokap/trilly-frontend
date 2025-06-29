@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import { getProfile } from "../services/userProfileService";
-
+import { getProfile, loadUsers } from "../services/userProfileService";
 function Search({setUserProfile, username}){
     const [inputValue, setInputValue] = useState('');
 
@@ -14,28 +13,13 @@ function Search({setUserProfile, username}){
 
     const [users, setUsers] = useState([]);
 
-    const loadUsers = async (usernameToFind) => {
-        try{
-            if(usernameToFind === ''){
-                setUsers([])
-                setUserProfile(null)
-            }
-            setInputValue(usernameToFind)
-            const response = await axios.get(`http://localhost:9999/api/v1/users/${usernameToFind}`,{
-              params:{
-                username: username
-              }
-            });
-            setUsers(response.data)
-
-        }catch(e){}
-    }
+    
 
     return(
         <form className="flex sticky top-0 justify-center items-center z-20 w-full" onSubmit={handleSubmit}>
               <div className="relative w-[50%] flex flex-col items-center">
                 <div className="w-full relative">
-                  <input placeholder="Search someone..." value={inputValue} onChange={(e) => loadUsers(e.target.value)}
+                  <input placeholder="Search someone..." value={inputValue} onChange={(e) => loadUsers(e.target.value, setUsers, setUserProfile, setInputValue, username)}
                         className="border-[#2a2a2e] backdrop-blur bg-inherit outline-none p-3 border-2 w-full text-white placeholder:text-white font-thin pr-10"/>
                   <button type="submit" className="absolute right-2 top-1/2 -translate-y-1/2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" className="text-white hover:text-[gray] duration-300" fill="currentColor" viewBox="0 0 16 16">

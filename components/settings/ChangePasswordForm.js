@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import { changePassword } from "../../services/settingsService";
 import ExitButton from "../ExitButton";
 
 export default function ChangePasswordForm({username, useChangePassword}) {
@@ -14,28 +14,16 @@ export default function ChangePasswordForm({username, useChangePassword}) {
     }
 
     const [changePasswordMSG, setChangePasswordMSG] = useState("");
-    const changePassword = async (e) =>{
-        e.preventDefault();
-        try{
-            const response = await axios.put("http://localhost:9999/api/v1/user/changePassword",
-            {
-                "username": username,
-                "prevPassword": prevPassword,
-                "newPassword": pass
-            });
-            setPass("");
-            setPrevPassword("");
-            setChangePasswordMSG(response.data.changePasswordMessage);
-        }
-        catch(e){}
-    }
+    
 
     return(
         <div className="flex flex-col items-center gap-16">
             <p className="text-white text-center text-4xl font-medium flex flex-row items-center">
                 Change password
             </p>
-            <form className="flex flex-col gap-16 bg-zinc-800 p-14 rounded-md min-w-[50%] max-w-[50%]" onSubmit={changePassword} >
+            <form className="flex flex-col gap-16 bg-zinc-800 p-14 rounded-md min-w-[50%] max-w-[50%]" 
+                onSubmit={(e) => changePassword(e, username, prevPassword, pass, setPass, setPrevPassword, setChangePasswordMSG)}>
+                    
                 <div className="flex justify-end">
                     <ExitButton getBack={useChangePassword}/>
                 </div>

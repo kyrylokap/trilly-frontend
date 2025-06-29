@@ -1,43 +1,22 @@
 import { useState, useEffect } from "react";
 import Chats from "./chat/Chats";
-import axios from 'axios'
 import { motion } from "framer-motion";
 import ExitButton from "./ExitButton";
 import Settings from "./settings/Settings";
+import { getUserChats } from "../services/chatService";
+
 function Aside({username, changeAside, aside, handleBack, 
       setSelectedChat, selectedChat, settings, openSettings}){
   
 
     const [chats, setChats] = useState([])
-    const getUserChats = async () => {
-        try{
-            const response = await axios.get(
-                "http://localhost:9999/api/v1/users/"+ username + "/chats"
-            )
-            setChats(response.data)
-            console.log(response.data)
-        }
-        catch(error){}
-    };
-
+    const [searchedChats, setSearchedChats] = useState([]);
+    
     useEffect(() =>{
-        getUserChats();
+        getUserChats(username, setChats);
     },[username])
 
-    const [searchedChats, setSearchedChats] = useState([]);
-
-    const getSearchedChats = async (e) => {
-        try{
-            if(e === ""){
-              setSearchedChats([]);
-            }else{
-              const response = await axios.get(`http://localhost:9999/api/v1/chats/${username}/${e}`);
-            setSearchedChats(response.data);
-            }
-            
-        }
-        catch (e){}
-    }
+    
 
     
     return (
@@ -59,8 +38,8 @@ function Aside({username, changeAside, aside, handleBack,
             }
           }}/>
           {settings === false ? 
-            <Chats getSearchedChats={getSearchedChats} username={username} setSelectedChat={setSelectedChat} setSearchedChats={setSearchedChats} 
-                              searchedChats={searchedChats} selectedChat={selectedChat} chats={chats} handleBack={handleBack} refreshChats={getUserChats}/> : 
+            <Chats  username={username} setSelectedChat={setSelectedChat} setSearchedChats={setSearchedChats} 
+                              searchedChats={searchedChats} selectedChat={selectedChat} chats={chats} handleBack={handleBack} /> : 
             <Settings username={username} />
           }
           </motion.div>

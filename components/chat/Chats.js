@@ -1,9 +1,10 @@
 import ChatsList from "./ChatsList";
 import InChat from "./InChat";
 import SearchChats from "./SearchChats";
+import { getSearchedChats } from "../../services/chatService";
 
-export default function Chats({getSearchedChats, username, setSelectedChat, setSearchedChats, 
-                            searchedChats, selectedChat, chats, handleBack, refreshChats}){
+export default function Chats({ username, setSelectedChat, setSearchedChats, 
+                            searchedChats, selectedChat, chats, handleBack}){
                                 
     return(
         <div>
@@ -11,7 +12,7 @@ export default function Chats({getSearchedChats, username, setSelectedChat, setS
           My chats
         </p>
         <div className="flex flex-col items-center justify-center relative">
-          <input onChange={(e) => getSearchedChats(e.target.value)}
+          <input onChange={(e) => getSearchedChats(e.target.value, setSearchedChats, username)}
             placeholder="Search in your chats..."
             className="border-b-2 m-4 p-2 pl-4 outline-none placeholder-white w-[70%] bg-transparent text-white font-thin placeholder:font-thin"/>
           <SearchChats searchedChats={searchedChats} myUsername={username} setSelectedChat={setSelectedChat} setSerchedChats={setSearchedChats}/>
@@ -20,7 +21,7 @@ export default function Chats({getSearchedChats, username, setSelectedChat, setS
         
         {selectedChat === null ? 
           (<ChatsList chats={chats} setSelectedChat={setSelectedChat} usernamme={username}/>): 
-          (<InChat selectedChatId={selectedChat.chatId} handleBack={handleBack} username={username} chatMembers={selectedChat.usernames} refreshChats={refreshChats}/>)
+          (<InChat selectedChatId={selectedChat.chatId} handleBack={handleBack} username={username} chatMembers={selectedChat.usernames} />)
         }
         </div>
     );

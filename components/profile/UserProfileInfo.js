@@ -1,4 +1,4 @@
-import axios from "axios";
+
 
 import BlockButton from "./BlockButton";
 import FollowButton from "./FollowButton";
@@ -8,26 +8,7 @@ function UserProfileInfo({profileUsername, showFollowers, followersCount, showFo
                         followingsCount, username, follow, setFollowersCount, 
                         getFollow, setSelectedChat,
                         changeAside}) {
-    const followUser = async () =>{
-        try{
-            if(follow === true){
-                await axios.put('http://localhost:9999/api/v1/users/user/unFollow',
-                    {
-                    "firstUsername":username,
-                    "secondUsername":profileUsername
-                })
-                setFollowersCount(prev => prev - 1);
-            }else{
-                await axios.put('http://localhost:9999/api/v1/users/user/follow',
-                    {
-                    "firstUsername":username,
-                    "secondUsername":profileUsername
-                })
-                setFollowersCount(prev => prev + 1);
-            }
-            getFollow()
-        }catch(e){}
-    }
+    
 
     return(
         <div className="ml-16">
@@ -50,7 +31,7 @@ function UserProfileInfo({profileUsername, showFollowers, followersCount, showFo
                         {followingsCount}
                     </div>
                 </div>
-                <FollowButton username={username} profileUsername={profileUsername} followUser={followUser} follow={follow}/>
+                <FollowButton username={username} profileUsername={profileUsername}  follow={follow} setFollowersCount={setFollowersCount} getFollow={getFollow}/>
                 <BlockButton username={username} profileUsername={profileUsername}/>
                 <OpenChatButton username={username} profileUsername={profileUsername} setSelectedChat={setSelectedChat} changeAside={changeAside}/>
             </div>
