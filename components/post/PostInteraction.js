@@ -5,7 +5,7 @@ import Shares from "./postInteractionMembers/Shares";
 import Comments from "./postInteractionMembers/Comments";
 import { likePost } from "../../services/postService";
 
-function PostInteraction({postId, username, setSelectedComments, post }){
+function PostInteraction({postId, username, setSelectedComments, post}){
 
     const [like, setLike] = useState(false);
     
@@ -13,12 +13,11 @@ function PostInteraction({postId, username, setSelectedComments, post }){
             <div className="w-[30%] pl-3 pt-6 select-none font-thin flex flex-col  border-[#2a2a2e] border-2 border-l-0 mt-[99px] rounded-r-xl ">
                 <div className="text-[1.2vw]">
                     <Likes  likePost={() => likePost(setLike, postId, username)} post={post} like={like} />
-                    <Shares />
+                    <Shares username={username} mediaUrl={post.mediaUrl}/>
                     <Comments setSelectedComments={setSelectedComments}/>
                 </div>
                 <div className="flex gap-4 whitespace-normal flex-wrap items-center">
-                <p className="text-white p-0 font-thin pb-3 break-words text-ellipsis text-[1.5vw] text-xs sm:text-base md:text-2xl">{post.description}</p>
-                   
+                    <p className="text-white p-0 font-thin pb-3 break-words text-ellipsis text-[1.5vw] text-xs sm:text-base md:text-2xl">{post.description}</p>
                 </div>
                 
             </div>

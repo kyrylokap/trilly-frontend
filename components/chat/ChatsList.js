@@ -14,7 +14,7 @@ function ChatsList({chats, setSelectedChat, username}){
                     return(<p className="font-semibold text-gray-500 text-lg group-hover:text-white  duration-500" key={index}>{index !== 0 ? `,` : ` `}{name}</p>);
                   })}
                 </div>
-                <p>{chat.lastMessage}</p>
+                <p>{chat.lastMessageType === "image" ? "Some post" : chat.lastMessage}</p>
               </div>
               
             </li>

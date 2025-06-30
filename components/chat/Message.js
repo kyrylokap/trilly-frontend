@@ -1,9 +1,13 @@
+import { getPostById } from "../../services/postService";
 
-function Message({message, time, sender, username}){
+function Message({message, time, sender, username, type}){
     return(
         <div className={`flex flex-col ${username === sender ? 'items-end' : 'items-start'} `}>
              <li className={`max-w-[50%] ${username === sender ? "bg-zinc-800 rounded-l-xl  " : "bg-slate-600 rounded-r-xl"} text-white p-3 w-fit  rounded-t-xl break-all`}>
-                {message}
+                {type === "text" ? 
+                    <p>{message}</p> : 
+                    <img src={message} alt={`photo`}></img>
+                }
              </li>
              <div className="text-white text-sm flex items-center">
                 <p className="pr-2">

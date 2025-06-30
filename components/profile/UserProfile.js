@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from 'axios'
 import Post from "../post/Post";
-import UserList from "./UserList";
+import UserListProfile from "./UserListProfile";
 import UserProfileInfo from "./UserProfileInfo";
 import ExitButton from '../ExitButton'
-import AddPost from "./AddPost";
 
 
 function UserProfile({profile, getBack, username, setUserProfile, setSelectedChat, 
@@ -48,8 +47,8 @@ function UserProfile({profile, getBack, username, setUserProfile, setSelectedCha
 
     return(
         <div className="text-white flex flex-col">
-                {followings && <UserList choose={true} username={profile.username} close={close} setUserProfile={setUserProfile}/>}
-                {followers && <UserList choose={false} username={profile.username} close={close} setUserProfile={setUserProfile}/>}
+                {followings && <UserListProfile choose={true} username={profile.username} close={close} setUserProfile={setUserProfile}/>}
+                {followers && <UserListProfile choose={false} username={profile.username} close={close} setUserProfile={setUserProfile}/>}
                    
 
 

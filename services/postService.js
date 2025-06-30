@@ -15,13 +15,18 @@ export const loadPosts = async (setPosts) => {
     }catch(e){}
 }
 
-export const post = async (username, place, mediaUrl, description) => {
+export const post = async (username, place, mediaUrl, description, updateDescription, updatePhotoUrl, updatePlace, setRespText) => {
     try{
         await axios.post(`http://localhost:9999/api/v1/users/${username}/post`,{
             place: place,
             mediaUrl: mediaUrl,
             description: description
-        }); 
+        });
+        updateDescription(' ');
+        updatePhotoUrl(' ');
+        updatePlace(' ');
+        setRespText(`Added new post to profile - ${username}`)
     }
     catch(e){}
 }
+
