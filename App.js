@@ -6,9 +6,10 @@ import Register from './components/pages/Register';
 function App() {
   return (
     <BrowserRouter>
-      <Routes> 
-        <Route path='/' element={<Main />}/>  
+      <Routes>
         <Route path='/login' element={<Login />} />
+        <Route path='/' element={<Main />}/>  
+        
         <Route path='/register' element={<Register />} />
         <Route path='/chat/:user' element={<Main />} />
       </Routes >

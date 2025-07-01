@@ -13,10 +13,12 @@ function UserProfile({profile, getBack, username, setUserProfile, setSelectedCha
         try{
             const response = await axios.get('http://localhost:9999/api/v1/users/user/checkFollow',{
                 params:{
-                    firstUsername:username,
                     secondUsername:profile.username
                 }
-            })
+            ,headers: {
+                    Authorization: 'Bearer ' + localStorage.getItem('token')
+                    }
+                });
             setFollow(response.data)
         }catch(e){}
     }
@@ -55,7 +57,7 @@ function UserProfile({profile, getBack, username, setUserProfile, setSelectedCha
                 <ExitButton getBack={getBack}/>
                 <div className="flex flex-col gap-8 p-2">
                     <div className="flex flex-row">
-                        <UserProfileInfo changeAside={changeAside} profileUsername={profile.username} showFollowers={showFollowers} followersCount={followersCount} 
+                        <UserProfileInfo setUserProfile={setUserProfile} changeAside={changeAside} profileUsername={profile.username} showFollowers={showFollowers} followersCount={followersCount} 
                             showFollowings={showFollowings} followingsCount={profile.followingsCount} username={username} follow={follow} 
                             setFollowersCount={setFollowersCount} getFollow={getFollow}setSelectedChat={setSelectedChat}/>
                          
@@ -63,7 +65,7 @@ function UserProfile({profile, getBack, username, setUserProfile, setSelectedCha
                     <div className="flex flex-col">
                         <ul>
                         {profile.posts.map((post) =>{
-                            return(<Post post={post} username={username} setUserProfile={setUserProfile}/>);
+                            return(<Post post={post} key={post.postId} username={username} setUserProfile={setUserProfile}/>);
                             })}
                         </ul>
                     </div> 

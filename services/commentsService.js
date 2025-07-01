@@ -8,6 +8,10 @@ export const sendComment = async (username, commentToSend, postId,  setComment, 
                 {
                     "username": username,
                     "text": commentToSend
+                },
+                {headers: {
+                    Authorization: 'Bearer ' + localStorage.getItem('token')
+                    }
                 }
             )
             getComments(setComments, postId)
@@ -18,7 +22,11 @@ export const sendComment = async (username, commentToSend, postId,  setComment, 
 
 export const getComments = async (setComments, postId) => {
     try{
-        const response = await axios.get('http://localhost:9999/api/v1/posts/'+ postId + '/comments')
+        const response = await axios.get('http://localhost:9999/api/v1/posts/'+ postId + '/comments',
+                {headers: {
+                    Authorization: 'Bearer ' + localStorage.getItem('token')
+                    }
+                })
         setComments(response.data)
     }
     catch(e){}

@@ -22,7 +22,7 @@ export default function ChangePasswordForm({username, useChangePassword}) {
                 Change password
             </p>
             <form className="flex flex-col gap-16 bg-zinc-800 p-14 rounded-md min-w-[50%] max-w-[50%]" 
-                onSubmit={(e) => changePassword(e, username, prevPassword, pass, setPass, setPrevPassword, setChangePasswordMSG)}>
+                onSubmit={(e) => changePassword(e, prevPassword, pass, setPass, setPrevPassword, setChangePasswordMSG)}>
                     
                 <div className="flex justify-end">
                     <ExitButton getBack={useChangePassword}/>

@@ -12,15 +12,15 @@ export default function Chats({ username, setSelectedChat, setSearchedChats,
           My chats
         </p>
         <div className="flex flex-col items-center justify-center relative">
-          <input onChange={(e) => getSearchedChats(e.target.value, setSearchedChats, username)}
+          <input onChange={(e) => getSearchedChats(e.target.value, setSearchedChats)}
             placeholder="Search in your chats..."
             className="border-b-2 m-4 p-2 pl-4 outline-none placeholder-white w-[70%] bg-transparent text-white font-thin placeholder:font-thin"/>
-          <SearchChats searchedChats={searchedChats} myUsername={username} setSelectedChat={setSelectedChat} setSerchedChats={setSearchedChats}/>
+          <SearchChats searchedChats={searchedChats}  setSelectedChat={setSelectedChat} setSerchedChats={setSearchedChats}/>
         </div>
 
         
         {selectedChat === null ? 
-          (<ChatsList chats={chats} setSelectedChat={setSelectedChat} usernamme={username}/>): 
+          (<ChatsList chats={chats} setSelectedChat={setSelectedChat} username={username}/>): 
           (<InChat selectedChatId={selectedChat.chatId} handleBack={handleBack} username={username} chatMembers={selectedChat.usernames} />)
         }
         </div>

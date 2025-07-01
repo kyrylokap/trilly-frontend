@@ -26,7 +26,7 @@ function UserListProfile({choose, username, close, setUserProfile}) {
                 <h2 className="text-xl font-semibold mb-4 text-white text-center">
                   {choose ? "Followings" : "Followers"}
                 </h2>
-                <UserList users={users} getProfile={getProfile} setUserProfile={setUserProfile} close={close}/>
+                <UserList users={users} mode={true} getProfile={getProfile} setUserProfile={setUserProfile} close={close}/>
             </div>
         </div>
 );

@@ -28,7 +28,7 @@ function Shares({username, mediaUrl}){
                         <ExitButton getBack={() => changeShare(!share)}/>
                     </div>
                     <p className="text-center text-3xl text-white ">Share to</p>
-                    <UserList users={users} username={username} mediaUrl={mediaUrl} />
+                    <UserList users={users} username={username} mediaUrl={mediaUrl} mode={false}/>
                 </div>
             </div>}
           

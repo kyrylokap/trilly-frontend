@@ -13,7 +13,7 @@ function Aside({username, changeAside, aside, handleBack,
     const [searchedChats, setSearchedChats] = useState([]);
     
     useEffect(() =>{
-        getUserChats(username, setChats);
+        getUserChats(setChats);
     },[username])
 
     

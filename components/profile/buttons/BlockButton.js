@@ -6,12 +6,14 @@ function BlockButton({username, profileUsername}) {
     const [isBlocked, setIsBlocked] = useState(false);
     const checkBlockStatus = async () => {
         try{
-            const response = await axios.get("http://localhost:9999/api/v1/users/user/checkBlock",{
-                params:{
-                    username: username,
-                    profileUsername: profileUsername
-                }
-            })
+            const response = await axios.get("http://localhost:9999/api/v1/users/user/checkBlock", {
+            params: {
+                profileUsername: profileUsername
+            },
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('token')
+            }
+        });
             setIsBlocked(response.data);
         }catch(e){}
     }
@@ -19,14 +21,14 @@ function BlockButton({username, profileUsername}) {
     const changeBlockStatus = async () =>{
         try{
             checkBlockStatus();
-            await axios.put(`http://localhost:9999/api/v1/users/user/${isBlocked ? `unblock`: `block`}`,null,
-                {
-                    params:{
-                        username: username,
-                        profileUsername: profileUsername
-                    }
+            await axios.put(`http://localhost:9999/api/v1/users/user/${isBlocked ? `unblock`: `block`}`,null,{
+                params:{
+                    profileUsername: profileUsername
                 }
-            )
+            ,headers: {
+                    Authorization: 'Bearer ' + localStorage.getItem('token')
+                    }
+                });
             setIsBlocked(!isBlocked);
         }
         catch(e){}

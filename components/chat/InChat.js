@@ -37,8 +37,8 @@ function InChat({selectedChatId, handleBack, username, chatMembers, setChats}){
                 </ul>
             </div>
             <form onSubmit={async (e) => {
-                await sendMessage(e, selectedChatId, input, username, setInput, setMessages, "text");
-                getUserChats(username, setChats);}}> 
+                await sendMessage(e, selectedChatId, input, setInput, setMessages, "text");
+                getUserChats(setChats);}}> 
                 <input placeholder="Type something..." value={input} onChange={(e) => setInput(e.target.value)} className="placeholder:text-white bg-transparent border-2 border-[gray] outline-none text-lg  w-full p-3 rounded-b-lg"/>
                 <button  className='hidden'></button>
             </form>

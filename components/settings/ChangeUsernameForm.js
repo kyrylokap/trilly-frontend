@@ -19,7 +19,7 @@ export default function ChangeUsernameForm({username, useChangeUsername}) {
                 Change username
             </p>
 
-            <form className="flex flex-col gap-16 bg-zinc-800 p-14 rounded-md min-w-[50%] max-w-[50%]" onSubmit={(e) => changeUsernameRequest(e,username, providedUsername, setResponseMSG)}>
+            <form className="flex flex-col gap-16 bg-zinc-800 p-14 rounded-md min-w-[50%] max-w-[50%]" onSubmit={(e) => changeUsernameRequest(e,providedUsername, setResponseMSG)}>
                 <div className="flex justify-end">
                     <ExitButton getBack={useChangeUsername}/>
                 </div>

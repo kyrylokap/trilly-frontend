@@ -1,20 +1,35 @@
 
 
 import {Link} from 'react-router-dom'
-
+import { useState } from 'react';
+import axios from 'axios';
 
 function Login(){
+
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const loginRequest = async (e) =>{
+        e.preventDefault();
+       try{
+            const response = await axios.post(`http://localhost:9999/api/v1/auth/login`,{
+                "username": username,
+                "password": password
+            });
+            localStorage.setItem('token', response.data.token)
+        }
+        catch(e){}
+    }
 
     return(
         <div className="flex flex-col items-center h-[100vh] justify-center bg-[#18181a]">
             <div className="bg-[#0c0c0f] flex flex-col pb-8 pt-16 rounded-xl p-4">
 
-                <form className='flex flex-col pt-1 pb-1'>
+                <form className='flex flex-col pt-1 pb-1' onSubmit={(e) => loginRequest(e)}>
                     <h1 className="text-5xl text-center font-bold text-white">Log in</h1>
                     <p className="ml-6 text-white mt-3 ">Username</p>
-                    <input  className="outline-none m-5 p-1 rounded-xl mt-0"/>
+                    <input  className="outline-none m-5 p-1 rounded-xl mt-0" value={username} onChange={(e) => setUsername(e.target.value)}/>
                     <p className="ml-6 text-white mt-3 m-0">Password</p>
-                    <input className="outline-none m-5 p-1 rounded-xl mt-0" type="password"/>
+                    <input className="outline-none m-5 p-1 rounded-xl mt-0" type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
                     <Link className='text-[#7c7c7c] text-xs text-end underline m-2 hover:text-white duration-700' to={"/"}>
                         Forgot password?
                     </Link>
