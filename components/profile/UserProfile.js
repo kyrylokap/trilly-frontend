@@ -1,10 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from 'axios'
 import Post from "../post/Post";
 import UserListProfile from "./UserListProfile";
 import UserProfileInfo from "./UserProfileInfo";
 import ExitButton from '../ExitButton'
-
+import L from 'leaflet';
+import { MapContainer, TileLayer, Marker, Popup, CircleMarker } from 'react-leaflet';
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
+  iconUrl: require('leaflet/dist/images/marker-icon.png'),
+  shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
+});
 
 function UserProfile({profile, getBack, setUserProfile, setSelectedChat, 
                     changeAside}) {
@@ -44,8 +51,31 @@ function UserProfile({profile, getBack, setUserProfile, setSelectedChat,
         setFollowings(false);
     }
     
+    const [positions, setPositions] = useState([]);
+    useEffect(() => {
+      async function fetchPositions() {
+        try {
+          const response = await axios.get('http://localhost:9999/api/v1/user/positions/today', {
+            headers: {
+              Authorization: 'Bearer ' + localStorage.getItem('token')
+            }
+          });
+          setPositions(response.data);
+        } catch (e) {}
+      }
+      fetchPositions();
+    }, [profile.username]);
+        const mapRef = useRef(null);
+          useEffect(() => {
+           if (positions.length > 0 && mapRef.current) {
+             const lastPos = positions[positions.length - 1];
+             mapRef.current.flyTo([lastPos.latitude, lastPos.longitude], 13, {
+               duration: 1.5
+             });
+           }
+         }, [positions]);
     
-    
+        
 
     return(
         <div className="text-white flex flex-col">
@@ -60,8 +90,38 @@ function UserProfile({profile, getBack, setUserProfile, setSelectedChat,
                         <UserProfileInfo setUserProfile={setUserProfile} changeAside={changeAside} profileUsername={profile.username} showFollowers={showFollowers} followersCount={followersCount} 
                             showFollowings={showFollowings} followingsCount={profile.followingsCount} follow={follow} 
                             setFollowersCount={setFollowersCount} getFollow={getFollow}setSelectedChat={setSelectedChat}/>
-                         
+                         <div style={{ height: '400px', width: '50%', marginTop: '20px' }}>
+                        {positions.length > 0 ? (
+                        <MapContainer
+                          center={[positions[positions.length - 1].latitude, positions[positions.length - 1].longitude]}
+                          zoom={13}
+                          scrollWheelZoom={{filter: (event) => event.ctrlKey === true}}
+                          style={{ height: '100%', width: '100%' }}
+                          whenCreated={mapInstance => { mapRef.current = mapInstance }}>
+                          <TileLayer
+                            attribution='&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap</a>'
+                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                          />
+                          {positions.map((pos, idx) => (
+                            <CircleMarker key={idx} center={[pos.latitude, pos.longitude]} 
+                             radius={6} color="black" fillColor="black" 
+                             fillOpacity={0.8} >
+
+                              <Popup>
+                                <p>{pos.time}</p>
+                              </Popup>
+                              
+                            </CircleMarker>
+                          ))}
+                        </MapContainer>
+                        ) : (
+                          <div className="flex justify-center items-center h-full text-gray-400">
+                            Загрузка карты...
+                          </div>
+                        )}
                     </div>
+                    </div>
+                    
                     <div className="flex flex-col">
                         <ul>
                         {profile.posts.map((post) =>{
