@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-function BlockButton({username, profileUsername}) {
+function BlockButton({ profileUsername}) {
 
     const [isBlocked, setIsBlocked] = useState(false);
     const checkBlockStatus = async () => {
@@ -41,7 +41,7 @@ function BlockButton({username, profileUsername}) {
 
     return(
         <button onClick={changeBlockStatus}
-                className={`w-36 bg-black text-xl font-light tracking-wider pl-6 pr-6 p-1 rounded-xl mt-6 hover:bg-gray-600 duration-500 ${username === profileUsername && `hidden`}`}>
+                className={`w-36 bg-black text-xl font-light tracking-wider pl-6 pr-6 p-1 rounded-xl mt-6 hover:bg-gray-600 duration-500 ${localStorage.getItem("username") === profileUsername && `hidden`}`}>
                 {isBlocked ? `Unblock` : `Block`}
         </button>
     );

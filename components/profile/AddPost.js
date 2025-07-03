@@ -2,7 +2,7 @@ import { post } from "../../services/postService";
 import ExitButton from "../ExitButton";
 import { useState } from "react";
 
-export default function AddPost({addPost, username}){
+export default function AddPost({addPost}){
     const [place, setPlace] = useState('');
     const updatePlace = (text) => {
         setPlace(text);
@@ -20,7 +20,7 @@ export default function AddPost({addPost, username}){
 
     const send = async (e) => {
         e.preventDefault();
-        post(username, place, mediaUrl, description, setDescription, setMediaUrl, setPlace, setRespText);
+        post(localStorage.getItem("username"), place, mediaUrl, description, setDescription, setMediaUrl, setPlace, setRespText);
     }
 
     const [respText, setRespText] = useState('');

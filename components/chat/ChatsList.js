@@ -1,7 +1,7 @@
 import UserSvg from "../UserSvg";
 
 
-function ChatsList({chats, setSelectedChat, username}){
+function ChatsList({chats, setSelectedChat}){
     return(
         <ul className="ml-2 border-t">
           {chats.map((chat) => (
@@ -10,7 +10,7 @@ function ChatsList({chats, setSelectedChat, username}){
               <UserSvg style={`text-[gray] group-hover:text-white  duration-500`}/>
               <div className="text-white flex flex-col ml-3 text-left ">
                 <div className="flex gap-2 ">
-                  {chat.usernames.filter((name) => name !== username).map((name, index) => {
+                  {chat.usernames.filter((name) => name !== localStorage.getItem("username")).map((name, index) => {
                     return(<p className="font-semibold text-gray-500 text-lg group-hover:text-white  duration-500" key={index}>{index !== 0 ? `,` : ` `}{name}</p>);
                   })}
                 </div>

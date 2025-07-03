@@ -2,7 +2,7 @@ import { useState } from "react";
 import { changePassword } from "../../services/settingsService";
 import ExitButton from "../ExitButton";
 
-export default function ChangePasswordForm({username, useChangePassword}) {
+export default function ChangePasswordForm({ useChangePassword}) {
     const [prevPassword, setPrevPassword] = useState("");
     const changePrevPassword =  (prev) => {
         setPrevPassword(prev);

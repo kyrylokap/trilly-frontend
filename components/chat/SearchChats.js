@@ -1,6 +1,6 @@
 
 
-export default function SearchChats({searchedChats, myUsername, setSelectedChat, setSerchedChats}){
+export default function SearchChats({searchedChats, setSelectedChat, setSerchedChats}){
     const selectChat = (chat) => {
         setSelectedChat(chat);
         setSerchedChats([]);
@@ -11,11 +11,11 @@ export default function SearchChats({searchedChats, myUsername, setSelectedChat,
             {searchedChats !== null && searchedChats.map((chat) => {
                 return(
                     <li key={chat.id} className="bg-[#2a2a2e] p-2 hover:bg-black duration-300 border mb-2  cursor-pointer" onClick={(e) => selectChat(chat)}>
-                        <ul>
+                        <ul className="flex gap-3">
                             {chat.usernames.map((username) => {
                                 return(
                                     <li className="text-white">
-                                       { myUsername !== username && <p>{username}</p>}
+                                       { localStorage.getItem('username') !== username && <p>{username}</p>}
                                     </li>
                                 );
                             })}

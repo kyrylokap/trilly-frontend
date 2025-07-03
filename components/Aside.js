@@ -5,7 +5,7 @@ import ExitButton from "./ExitButton";
 import Settings from "./settings/Settings";
 import { getUserChats } from "../services/chatService";
 
-function Aside({username, changeAside, aside, handleBack, 
+function Aside({changeAside, aside, handleBack, 
       setSelectedChat, selectedChat, settings, openSettings}){
   
 
@@ -14,7 +14,7 @@ function Aside({username, changeAside, aside, handleBack,
     
     useEffect(() =>{
         getUserChats(setChats);
-    },[username])
+    },[localStorage.getItem("username")])
 
     
 
@@ -38,9 +38,9 @@ function Aside({username, changeAside, aside, handleBack,
             }
           }}/>
           {settings === false ? 
-            <Chats  username={username} setSelectedChat={setSelectedChat} setSearchedChats={setSearchedChats} 
+            <Chats   setSelectedChat={setSelectedChat} setSearchedChats={setSearchedChats} 
                               searchedChats={searchedChats} selectedChat={selectedChat} chats={chats} handleBack={handleBack} /> : 
-            <Settings username={username} />
+            <Settings />
           }
           </motion.div>
         </div>

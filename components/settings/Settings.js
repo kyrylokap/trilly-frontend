@@ -2,7 +2,7 @@ import ChangePasswordForm from './ChangePasswordForm'
 import { useState } from 'react';
 import ChangeUsernameForm from './ChangeUsernameForm';
 
-function Settings({username, setUserProfile}){
+function Settings({ setUserProfile}){
 
     const [changePasswordBlock, setChangePasswordBlock] = useState(false);
     const useChangePassword = () => {
@@ -31,10 +31,10 @@ function Settings({username, setUserProfile}){
                     
                 </ul>
             </div>:
-            <ChangePasswordForm username={username} useChangePassword={useChangePassword} />}
+            <ChangePasswordForm  useChangePassword={useChangePassword} />}
             </div>
             :
-            <ChangeUsernameForm username={username} useChangeUsername={useChangeUsername}/>}
+            <ChangeUsernameForm  useChangeUsername={useChangeUsername}/>}
         </div>
         
     );

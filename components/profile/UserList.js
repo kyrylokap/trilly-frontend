@@ -1,7 +1,7 @@
 import { sendPost } from "../../services/inChatService";
 
 
-export default function UserList({username, users, getProfile, setUserProfile, close, mode, mediaUrl}){
+export default function UserList({ users, getProfile, setUserProfile, close, mode, mediaUrl}){
     return (
         <ul className="space-y-3">
            {users.length > 0 ? (

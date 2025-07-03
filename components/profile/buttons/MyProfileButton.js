@@ -1,9 +1,9 @@
 import { getProfile } from "../../../services/userProfileService";
 
-export default function MyProfileButton({username, setUserProfile}){
+export default function MyProfileButton({setUserProfile}){
     
     return(
-        <div className={`flex justify-center items-center gap-1 cursor-pointer h-10 group`} onClick={() => getProfile(username, setUserProfile)}>
+        <div className={`flex justify-center items-center gap-1 cursor-pointer h-10 group`} onClick={() => getProfile(localStorage.getItem('username'), setUserProfile)}>
             <svg xmlns="http://www.w3.org/2000/svg"  width="44" height="44" fill="currentColor" 
                 className="group-hover:text-[gray] duration-200 text-white cursor-pointer w-[clamp(13px,5vw,25px)] h-[clamp(13px,5vh,25px)]" viewBox="0 0 16 16">
                 <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>

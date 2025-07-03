@@ -4,7 +4,7 @@ import Comment from "./Comment";
 import ExitButton from "../../ExitButton";
 import { getComments, sendComment } from "../../../services/commentsService";
 
-function CommentsControl({handleBack, postId, username, setUserProfile}){
+function CommentsControl({handleBack, postId, setUserProfile}){
     const [commentToSend, setComment] = useState('');
 
     const [comments,setComments] = useState([]);
@@ -32,7 +32,7 @@ function CommentsControl({handleBack, postId, username, setUserProfile}){
             </ul> 
         
             <form onSubmit={(e) => {e.preventDefault();
-                                    sendComment(username, commentToSend, postId, setComment, setComments);}}>
+                                    sendComment(localStorage.getItem("username"), commentToSend, postId, setComment, setComments);}}>
                 <input value={commentToSend} onChange={(e) => {
                     setComment(e.target.value)
                 }} className="w-full rounded-lg px-2 py-[clamp(2px,0.4vw,10px)]  text-black

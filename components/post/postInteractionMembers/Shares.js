@@ -3,7 +3,7 @@ import ExitButton from "../../ExitButton";
 import { getUsers } from "../../../services/userListService";
 import UserList from "../../profile/UserList";
 
-function Shares({username, mediaUrl}){
+function Shares({ mediaUrl}){
     const [share, setShare] = useState(false);
     const changeShare = (e) =>{
         setShare(e);
@@ -13,7 +13,7 @@ function Shares({username, mediaUrl}){
     return(
         <div className="flex items-center gap-2 cursor-pointer pb-3 group" onClick={() => {
             changeShare(!share);
-            getUsers(true, username, setUsers);
+            getUsers(true, localStorage.getItem("username"), setUsers);
             }}>
             <svg xmlns="http://www.w3.org/2000/svg" 
             className="w-[clamp(8px,3vw,24px)] h-[clamp(8px,3vw,24px)]" fill="white"  viewBox="0 0 16 16">
@@ -28,7 +28,7 @@ function Shares({username, mediaUrl}){
                         <ExitButton getBack={() => changeShare(!share)}/>
                     </div>
                     <p className="text-center text-3xl text-white ">Share to</p>
-                    <UserList users={users} username={username} mediaUrl={mediaUrl} mode={false}/>
+                    <UserList users={users}  mediaUrl={mediaUrl} mode={false}/>
                 </div>
             </div>}
           

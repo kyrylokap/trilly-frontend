@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ExitButton from "../ExitButton";
 import { changeUsernameRequest } from "../../services/settingsService";
-export default function ChangeUsernameForm({username, useChangeUsername}) {
+export default function ChangeUsernameForm({ useChangeUsername}) {
     
     const [providedUsername, setProvidedUsername] = useState("");
     const changeUsername = (prUsername) => {

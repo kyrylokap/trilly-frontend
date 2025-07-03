@@ -29,12 +29,14 @@ export const changeUsernameRequest = async (e, providedUsername, setResponseMSG)
                 params:{
                     newUsername: providedUsername
                 }
-            },
-                {headers: {
+            ,
+                headers: {
                     Authorization: 'Bearer ' + localStorage.getItem('token')
                     }
                 }
         );
+        
+        localStorage.setItem('username', providedUsername);
         setResponseMSG(responseMessage.data);
     }
     catch(e){}

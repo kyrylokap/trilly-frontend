@@ -1,9 +1,9 @@
 
 
-function Message({message, time, sender, username, type}){
+function Message({message, time, sender, type}){
     return(
-        <div className={`flex flex-col ${username === sender ? 'items-end' : 'items-start'} `}>
-             <li className={`max-w-[50%] ${username === sender ? "bg-zinc-800 rounded-l-xl  " : "bg-slate-600 rounded-r-xl"} text-white p-3 w-fit  rounded-t-xl break-all`}>
+        <div className={`flex flex-col ${localStorage.getItem("username") === sender ? 'items-end' : 'items-start'} `}>
+             <li className={`max-w-[50%] ${localStorage.getItem("username") === sender ? "bg-zinc-800 rounded-l-xl  " : "bg-slate-600 rounded-r-xl"} text-white p-3 w-fit  rounded-t-xl break-all`}>
                 {type === "text" ? 
                     <p>{message}</p> : 
                     <img src={message} alt={`photo`}></img>
