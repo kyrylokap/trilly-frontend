@@ -3,8 +3,11 @@ import { Routes, Route, BrowserRouter} from 'react-router-dom'
 import Main from './components/pages/Home'
 import Login from './components/pages/Login'
 import Register from './components/pages/Register';
+import { PositionTracker } from './components/PositionTracker';
 function App() {
   return (
+    <>
+    <PositionTracker />
     <BrowserRouter>
       <Routes>
         <Route path='/login' element={<Login />} />
@@ -14,6 +17,8 @@ function App() {
         <Route path='/chat/:user' element={<Main />} />
       </Routes >
     </BrowserRouter>
+    </>
+    
     
   );
 }

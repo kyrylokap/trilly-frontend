@@ -2,13 +2,11 @@ import { useState, useEffect } from "react";
 import { getProfile } from "../../services/userProfileService";
 import { getUsers } from "../../services/userListService";
 import UserList from "./UserList";
+import Loader from "../Loader";
 
 function UserListProfile({choose, username, close, setUserProfile}) {
+
     const [users, setUsers] = useState([]);
-
-    
-    
-
     useEffect(() =>{
         getUsers(choose, username, setUsers);
     },[choose, username])
@@ -26,7 +24,11 @@ function UserListProfile({choose, username, close, setUserProfile}) {
                 <h2 className="text-xl font-semibold mb-4 text-white text-center">
                   {choose ? "Followings" : "Followers"}
                 </h2>
-                <UserList users={users} mode={true} getProfile={getProfile} setUserProfile={setUserProfile} close={close}/>
+                {users.length === 0 ? 
+                <Loader />:
+                    <UserList users={users} mode={true} getProfile={getProfile} setUserProfile={setUserProfile} close={close}/>
+                }
+                
             </div>
         </div>
 );

@@ -3,6 +3,7 @@ import { useState, useEffect ,useRef} from "react";
 import ExitButton from '../ExitButton';
 import { sendMessage, getMessages } from '../../services/inChatService';
 import { getUserChats } from '../../services/chatService';
+import Loader from '../Loader';
 
 function InChat({selectedChatId, handleBack, chatMembers, setChats}){
     const [messagesDTO, setMessages] = useState({ messages: [], times: [], senders:[] })
@@ -25,16 +26,20 @@ function InChat({selectedChatId, handleBack, chatMembers, setChats}){
     return(
         <div className="text-white ml-6">  
             <div className='flex items-center gap-6'>
-                <ExitButton getBack={handleBack}/>
+                   <ExitButton getBack={handleBack}/> 
+                
                 <h2 className="text-2xl font-semibold mb-4" > {chatMembers.filter((member) => member !== localStorage.getItem("username")).join(' ')}</h2>
             </div> 
-
+            
             <div className="bg-transparent p-4 rounded-t-lg space-y-2  overflow-y-auto min-h-[500px] max-h-[500px] scrollbar-hide border-2 border-[gray]" ref={containerRef}>
                 <ul className="space-y-2 flex-col ">
                     {messagesDTO.messages.map((message, index) => (
                         <Message key={index} type={messagesDTO.types[index]} message={message} time={messagesDTO.times[index]} sender={messagesDTO.senders[index]} />
                     ))}
                 </ul>
+
+                {messagesDTO.messages.length === 0 && <Loader />}
+                
             </div>
             <form onSubmit={async (e) => {
                 await sendMessage(e, selectedChatId, input, setInput, setMessages, "text");

@@ -3,19 +3,21 @@ import Post from "./post/Post";
 import { loadPosts } from "../services/postService";
 import UserProfile from "./profile/UserProfile";
 import Search from "./Search";
+import Loader from "./Loader";
 function Posts({changeAside, aside, setSelectedChat,profile, setUserProfile}){
 
     const [posts, setPosts] = useState([]);
     
     useEffect(() => {
-        loadPosts(setPosts)
+        loadPosts(setPosts);
     }, [localStorage.getItem("username")])
 
     const getBack = async () => setUserProfile(null);
 
     return(
         <div className={`h-[85vh]  bg-[#18181a]  overflow-auto scrollbar-hide`}>
-            <Search  setUserProfile={setUserProfile} />
+            <Search setUserProfile={setUserProfile} />
+            {posts.length === 0 && <Loader />}
             {profile === null ? 
                 (<div>
                     <ul>

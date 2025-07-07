@@ -6,6 +6,7 @@ import UserProfileInfo from "./UserProfileInfo";
 import ExitButton from '../ExitButton'
 import L from 'leaflet';
 import { MapContainer, TileLayer, Marker, Popup, CircleMarker } from 'react-leaflet';
+import { fetchPositions, sendPos } from "../../services/positionService";
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
@@ -53,27 +54,19 @@ function UserProfile({profile, getBack, setUserProfile, setSelectedChat,
     
     const [positions, setPositions] = useState([]);
     useEffect(() => {
-      async function fetchPositions() {
-        try {
-          const response = await axios.get('http://localhost:9999/api/v1/user/positions/today', {
-            headers: {
-              Authorization: 'Bearer ' + localStorage.getItem('token')
-            }
-          });
-          setPositions(response.data);
-        } catch (e) {}
-      }
-      fetchPositions();
+      fetchPositions(profile, setPositions);
     }, [profile.username]);
-        const mapRef = useRef(null);
-          useEffect(() => {
-           if (positions.length > 0 && mapRef.current) {
-             const lastPos = positions[positions.length - 1];
-             mapRef.current.flyTo([lastPos.latitude, lastPos.longitude], 13, {
-               duration: 1.5
-             });
-           }
-         }, [positions]);
+
+    const mapRef = useRef(null);
+      useEffect(() => {
+       if (positions.length > 0 && mapRef.current) {
+         const lastPos = positions[positions.length - 1];
+         mapRef.current.flyTo([lastPos.latitude, lastPos.longitude], 20, {
+           duration: 1.5
+         });
+       }
+    }, [positions]);
+    
     
         
 
@@ -81,22 +74,21 @@ function UserProfile({profile, getBack, setUserProfile, setSelectedChat,
         <div className="text-white flex flex-col">
                 {followings && <UserListProfile choose={true} username={profile.username} close={close} setUserProfile={setUserProfile}/>}
                 {followers && <UserListProfile choose={false} username={profile.username} close={close} setUserProfile={setUserProfile}/>}
-                   
-
-
                 <ExitButton getBack={getBack}/>
                 <div className="flex flex-col gap-8 p-2">
                     <div className="flex flex-row">
                         <UserProfileInfo setUserProfile={setUserProfile} changeAside={changeAside} profileUsername={profile.username} showFollowers={showFollowers} followersCount={followersCount} 
                             showFollowings={showFollowings} followingsCount={profile.followingsCount} follow={follow} 
                             setFollowersCount={setFollowersCount} getFollow={getFollow}setSelectedChat={setSelectedChat}/>
-                         <div style={{ height: '400px', width: '50%', marginTop: '20px' }}>
+                         
+                    </div>
+                    <div className=" h-[400px] w-[90%] mt-[20px] flex justify-start ml-6 z-0" >
                         {positions.length > 0 ? (
-                        <MapContainer
+                        <MapContainer 
                           center={[positions[positions.length - 1].latitude, positions[positions.length - 1].longitude]}
-                          zoom={13}
+                          zoom={20}
                           scrollWheelZoom={{filter: (event) => event.ctrlKey === true}}
-                          style={{ height: '100%', width: '100%' }}
+                          className="w-full lg:w-1/2   h-full flex justify-center items-center"
                           whenCreated={mapInstance => { mapRef.current = mapInstance }}>
                           <TileLayer
                             attribution='&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -104,7 +96,7 @@ function UserProfile({profile, getBack, setUserProfile, setSelectedChat,
                           />
                           {positions.map((pos, idx) => (
                             <CircleMarker key={idx} center={[pos.latitude, pos.longitude]} 
-                             radius={6} color="black" fillColor="black" 
+                             radius={3} color="black" fillColor="black" 
                              fillOpacity={0.8} >
 
                               <Popup>
@@ -116,12 +108,10 @@ function UserProfile({profile, getBack, setUserProfile, setSelectedChat,
                         </MapContainer>
                         ) : (
                           <div className="flex justify-center items-center h-full text-gray-400">
-                            Загрузка карты...
+                            Map is loading
                           </div>
                         )}
                     </div>
-                    </div>
-                    
                     <div className="flex flex-col">
                         <ul>
                         {profile.posts.map((post) =>{

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { getProfile, loadUsers } from "../services/userProfileService";
+import Loader from "./Loader";
 function Search({setUserProfile}){
     const [inputValue, setInputValue] = useState('');
 
@@ -26,20 +27,29 @@ function Search({setUserProfile}){
                     </svg>
                   </button>
                 </div>
-
-                {users.length > 0 && (
+                
+                {users.length === 0 && inputValue.length > 0 &&
+                <div className="relative">
+                  <div className="absolute">
+                    <Loader />
+                  </div>
+                </div>
+                
+                  
+                }
+                {users.length !== 0 &&
                   <ul className="absolute top-full left-0 z-10 max-h-60 overflow-y-auto w-full flex flex-col rounded-b-md backdrop-blur border-2 border-[#2a2a2e]">
                     {users.map((user) => (
                       <li key={user.username} onClick={() => {
                           getProfile(user.username, setUserProfile);
                           setUsers([]);
-                          setInputValue(user.username);
+                          setInputValue("");
                         }} className="font-thin text-white pl-3 p-2 cursor-pointer hover:bg-[#333] duration-300">
                         {user.username}
                       </li>
                     ))}
                   </ul>
-                )}
+                }
               </div>
             </form>
     );

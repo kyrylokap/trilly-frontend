@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Comment from "./Comment";
 import ExitButton from "../../ExitButton";
 import { getComments, sendComment } from "../../../services/commentsService";
+import Loader from "../../Loader";
 
 function CommentsControl({handleBack, postId, setUserProfile}){
     const [commentToSend, setComment] = useState('');
@@ -10,7 +11,7 @@ function CommentsControl({handleBack, postId, setUserProfile}){
     const [comments,setComments] = useState([]);
 
     
-
+    
     
     useEffect(() =>{
         getComments(setComments, postId);
@@ -25,11 +26,20 @@ function CommentsControl({handleBack, postId, setUserProfile}){
                 </p>
             </div>
             
+
+            {comments.length === 0 ? 
+                <div className=" flex justify-center items-center flex-1 h-full">
+                    <Loader /> 
+                </div>
+                : 
             <ul className=" overflow-y-auto scrollbar-hide  flex-1">
                 {comments.map((comment) => {
                     return <Comment comment={comment} setUserProfile={setUserProfile}/>;
                 })}
-            </ul> 
+            </ul> }
+
+            
+            
         
             <form onSubmit={(e) => {e.preventDefault();
                                     sendComment(localStorage.getItem("username"), commentToSend, postId, setComment, setComments);}}>

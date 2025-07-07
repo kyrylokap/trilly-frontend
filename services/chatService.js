@@ -14,6 +14,7 @@ export const openChat = async (profileUsername, setSelectedChat, changeAside) =>
         }});
         setSelectedChat(response.data);
         changeAside(true);
+        
     }
     catch(e){}
 }

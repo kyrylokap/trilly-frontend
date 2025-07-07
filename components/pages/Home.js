@@ -1,6 +1,7 @@
 import Nav from '../Nav'
 import Content from '../Content'
 import { useState } from 'react';
+import Loader from '../Loader';
 
 function Main(){
     const [aside, setAside] = useState(false);
