@@ -20,7 +20,7 @@ export default function AddPost({addPost}){
 
     const send = async (e) => {
         e.preventDefault();
-        post(localStorage.getItem("username"), place, mediaUrl, description, setDescription, setMediaUrl, setPlace, setRespText);
+        post(place, mediaUrl, description, setDescription, setMediaUrl, setPlace, setRespText);
     }
 
     const [respText, setRespText] = useState('');

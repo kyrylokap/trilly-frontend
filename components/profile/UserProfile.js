@@ -82,13 +82,12 @@ function UserProfile({profile, getBack, setUserProfile, setSelectedChat,
                             setFollowersCount={setFollowersCount} getFollow={getFollow}setSelectedChat={setSelectedChat}/>
                          
                     </div>
-                    <div className=" h-[400px] w-[90%] mt-[20px] flex justify-start ml-6 z-0" >
+                    <div className=" h-[400px] w-[90%] mt-[20px] flex justify-start ml-6 z-0 " >
                         {positions.length > 0 ? (
                         <MapContainer 
                           center={[positions[positions.length - 1].latitude, positions[positions.length - 1].longitude]}
                           zoom={20}
                           scrollWheelZoom={{filter: (event) => event.ctrlKey === true}}
-                          className="w-full lg:w-1/2   h-full flex justify-center items-center"
                           whenCreated={mapInstance => { mapRef.current = mapInstance }}>
                           <TileLayer
                             attribution='&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap</a>'
