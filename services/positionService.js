@@ -3,23 +3,27 @@ import axios from "axios"
 const url = "http://localhost:9999/api/v1/user"
 
 export const sendPos = async () => {
-    try{
-        navigator.geolocation.getCurrentPosition(async(position) => {
-                await axios.post(`${url}/addPosition`,null,{
-                params:{
-                    longitude: position.coords.longitude,
-                    latitude: position.coords.latitude
-                },headers: {
-                    Authorization: 'Bearer ' + localStorage.getItem('token')
-                    }
-                });
-                console.log("sended pos");
-        });
-        
+  if (localStorage.getItem('token') !== null) {
+    try {
+      const position = await new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject);
+      });
+
+      await axios.post(`${url}/addPosition`, null, {
+        params: {
+          longitude: position.coords.longitude,
+          latitude: position.coords.latitude
+        },
+        headers: {
+          Authorization: 'Bearer ' + localStorage.getItem('token')
+        }
+      });
+
+      console.log("Position sent");
+    } catch (e) {
+      console.error("Error sending position:", e);
     }
-    catch(e){
-        console.log(e);
-    }
+  }
 }
 
 export const fetchPositions = async (profile, setPositions) => {

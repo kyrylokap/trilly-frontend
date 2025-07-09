@@ -12,14 +12,14 @@ export const likePost = async (setLike, postId) => {
     catch(e){}
 }
 
-export const loadPosts = async (setPosts) => {
+export const loadPosts = async () => {
     try{
         const response = await axios.get("http://localhost:9999/api/v1/users/posts",
                 {headers: {
                     Authorization: 'Bearer ' + localStorage.getItem('token')
                     }
                 })
-        setPosts(response.data)
+        return response.data;
     }catch(e){}
 }
 

@@ -1,11 +1,11 @@
 
 
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import { useState } from 'react';
 import axios from 'axios';
 
-function Login(){
-
+function Login({setIsAuthenticated}){
+    const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const loginRequest = async (e) =>{
@@ -17,8 +17,16 @@ function Login(){
             });
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('username', username);
+            if(response.data.token !== null){
+                console.log("Form submitted");
+                navigate('/');
+                setIsAuthenticated(true);
+            }
+            
         }
-        catch(e){}
+        catch(e){
+            console.error("Login error:", e);
+        }
     }
 
     return(
@@ -37,7 +45,7 @@ function Login(){
                     
                     
                     <div className="flex flex-row justify-center">
-                        <button className="w-32 m-2 p-2  bg-black text-white rounded-lg border-none">Log in</button> 
+                        <button className="w-32 m-2 p-2  bg-black text-white rounded-lg border-none" type='submit'>Log in</button> 
                         <Link to={"/register"}>
                             <button className="w-32 m-2 p-2 border-none bg-white text-black rounded-lg">Register</button> 
                         </Link>  

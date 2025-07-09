@@ -7,15 +7,27 @@ import Loader from "./Loader";
 function Posts({changeAside, aside, setSelectedChat,profile, setUserProfile}){
 
     const [posts, setPosts] = useState([]);
-    
-    useEffect(() => {
-        loadPosts(setPosts);
-    }, [localStorage.getItem("username")])
-
     const getBack = async () => setUserProfile(null);
 
+    useEffect(() => {
+    const fetchInitial = async () => {
+      const data = await loadPosts();
+      setPosts(data); 
+    };
+
+    fetchInitial();
+    },[localStorage.getItem("username")]);
+
+    
+
+
+    const loadMore = async () => {
+      const data = await loadPosts();
+      setPosts(prevPosts => [...prevPosts, ...data]);
+    };
+
     return(
-        <div className={`h-[85vh]  bg-[#18181a]  overflow-auto scrollbar-hide`}>
+        <div className={`h-[85vh]  bg-[#18181a]  overflow-auto `}>
             <Search setUserProfile={setUserProfile} />
             {posts.length === 0 && <Loader />}
             {profile === null ? 
@@ -25,9 +37,11 @@ function Posts({changeAside, aside, setSelectedChat,profile, setUserProfile}){
                             return(<Post key={post.postId} post={post} setUserProfile={setUserProfile} />);
                             })}
                     </ul>
-                    <h1 className="text-2xl mt-6 mb-3 text-white text-center">
-                        That's all...
-                    </h1>
+                    <div className="text-center  flex justify-center p-4 cursor-pointer group">
+                        <p onClick={loadMore} className="text-white text-xl   border-white border-1 border-b group-hover:text-[gray] duration-300">
+                            Load more
+                        </p>  
+                    </div>
                 </div>) :
 
                 (<UserProfile profile={profile} changeAside={changeAside} 

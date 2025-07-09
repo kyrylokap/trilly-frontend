@@ -82,12 +82,14 @@ function UserProfile({profile, getBack, setUserProfile, setSelectedChat,
                             setFollowersCount={setFollowersCount} getFollow={getFollow}setSelectedChat={setSelectedChat}/>
                          
                     </div>
-                    <div className=" h-[400px] w-[90%] mt-[20px] flex justify-start ml-6 z-0 " >
-                        {positions.length > 0 ? (
+                    <div className="z-0 mt-[20px] flex justify-center ">
+                      {positions.length > 0 && (
                         <MapContainer 
+                          style={{ height: '400px', width: '80%'}}
+
                           center={[positions[positions.length - 1].latitude, positions[positions.length - 1].longitude]}
                           zoom={20}
-                          scrollWheelZoom={{filter: (event) => event.ctrlKey === true}}
+                          scrollWheelZoom={true}
                           whenCreated={mapInstance => { mapRef.current = mapInstance }}>
                           <TileLayer
                             attribution='&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -104,13 +106,10 @@ function UserProfile({profile, getBack, setUserProfile, setSelectedChat,
                               
                             </CircleMarker>
                           ))}
-                        </MapContainer>
-                        ) : (
-                          <div className="flex justify-center items-center h-full text-gray-400">
-                            Map is loading
-                          </div>
-                        )}
+                        </MapContainer>)}
                     </div>
+                        
+                        
                     <div className="flex flex-col">
                         <ul>
                         {profile.posts.map((post) =>{
