@@ -1,4 +1,5 @@
 
+import { Client } from "@stomp/stompjs";
 import axios from "axios"
 
 const url = "http://localhost:9999/api/v1/";
@@ -14,13 +15,31 @@ export const sendMessage = async (e, selectedChatId, input, setInput, setMessage
                 "type": type
             } ,
                 {headers: {
-                    Authorization: 'Bearer ' + localStorage.getItem('token')
+                    Authorization: 'Bea rer ' + localStorage.getItem('token')
                     }
                 }  
         ); 
         setInput('')
-        await getMessages(selectedChatId, setMessages)
+        await getMessages(selectedChatId, setMessages);
     }catch(error){}
+}
+
+export const sendMessageSocket = (e, selectedChatId, input, setInput, type, stompClient) => {
+    e.preventDefault();
+    if (stompClient && stompClient.connected) {
+        stompClient.publish({
+            destination: "/app/chat.send",
+            body: JSON.stringify({
+                chatId: selectedChatId,
+                text: input,
+                type: type/*,
+                token: "Bearer " + localStorage.getItem("token")*/
+            })
+        });
+        setInput("");
+    } else {
+        console.error("STOMP client not subcribe");
+    }
 }
 
 export const getMessages = async (selectedChatId, setMessages) => {
@@ -39,7 +58,6 @@ export const getMessages = async (selectedChatId, setMessages) => {
 };
 
 
-//const url = "http://localhost:9999/api/v1/users/getChat";
 export const sendPost = async (secondUsername, mediaUrl) =>{
     try{
         const chat = await axios.get(`${url}users/getChat`,{
