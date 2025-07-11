@@ -11,7 +11,7 @@ function PostInteraction({postId, setSelectedComments, post}){
     
     return(
             <div className="w-[30%] pl-3 pt-6 select-none font-thin flex flex-col  border-[#2a2a2e] border-2 border-l-0 mt-[99px] rounded-r-xl ">
-                <div className="text-[1.2vw]">
+                <div className="text-xs text-white md:text-base lg:text-2xl">
                     <Likes  likePost={() => likePost(setLike, postId, localStorage.getItem("username"))} post={post} like={like} />
                     <Shares  mediaUrl={post.mediaUrl}/>
                     <Comments setSelectedComments={setSelectedComments}/>

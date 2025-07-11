@@ -19,9 +19,9 @@ function CommentsControl({handleBack, postId, setUserProfile}){
     
     return(
         <div className="pl-4 aspect-[4/3] border-[#2a2a2e] border-2 border-l-0 mt-[99px] rounded-r-xl p-5  flex flex-col justify-between w-[30%] ">
-               <div className="flex flex-row gap-4">
+               <div className="flex flex-row gap-3">
                 <ExitButton getBack={handleBack}/>
-                <p className=" lg:text-xl text-xs truncate font-bold text-white ">
+                <p className=" text-[10px] md:text-lg lg:text-2xl truncate  text-white ">
                     Comments
                 </p>
             </div>

@@ -1,5 +1,4 @@
 
-import { Client } from "@stomp/stompjs";
 import axios from "axios"
 
 const url = "http://localhost:9999/api/v1/";
@@ -15,7 +14,7 @@ export const sendMessage = async (e, selectedChatId, input, setInput, setMessage
                 "type": type
             } ,
                 {headers: {
-                    Authorization: 'Bea rer ' + localStorage.getItem('token')
+                    Authorization: 'Bearer ' + localStorage.getItem('token')
                     }
                 }  
         ); 

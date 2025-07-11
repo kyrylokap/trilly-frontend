@@ -27,7 +27,7 @@ function Shares({ mediaUrl}){
                     <div className="flex justify-end">
                         <ExitButton getBack={() => changeShare(!share)}/>
                     </div>
-                    <p className="text-center text-3xl text-white ">Share to</p>
+                    <p className="text-center text-3xl  ">Share to</p>
                     <UserList users={users}  mediaUrl={mediaUrl} mode={false}/>
                 </div>
             </div>}

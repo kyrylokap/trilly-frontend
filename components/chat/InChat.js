@@ -23,7 +23,6 @@ function InChat({selectedChatId, handleBack, chatMembers, setChats}){
     }, [messagesDTO])
 
     useEffect(() => {
-    console.log(localStorage.getItem("token"));
 
     stompClient.current = new Client({
         webSocketFactory: () => new SockJS("http://localhost:9999/ws"),
@@ -34,7 +33,7 @@ function InChat({selectedChatId, handleBack, chatMembers, setChats}){
             onConnect: () => {
     stompClient.current.subscribe("/topic/messages", (msg) => {
         const message = JSON.parse(msg.body);
-        if (message.chatId === selectedChatId) {
+        if (message.chatId === selectedChatId){
             setMessages(prev => ({
                 messages: [...prev.messages, message.text],
                 times: [...prev.times, message.time],
@@ -56,8 +55,8 @@ function InChat({selectedChatId, handleBack, chatMembers, setChats}){
                 setTypingUser(null);
             }
         }
-    });
-},
+        });
+    },
             onStompError: (frame) => {
             console.error('Broker reported error: ' + frame.headers['message']);
             console.error('Additional details: ' + frame.body);
@@ -65,8 +64,8 @@ function InChat({selectedChatId, handleBack, chatMembers, setChats}){
         stompClient.current.activate();
         return () => {
             if (stompClient.current) stompClient.current.deactivate();
-        };
-    }, []);
+        };}, []);
+
     const onSubmit = (e) => {
         sendMessageSocket(e, selectedChatId, input, setInput, "text", stompClient.current);
     };
