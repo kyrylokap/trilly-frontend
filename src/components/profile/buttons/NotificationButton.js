@@ -9,5 +9,6 @@ export default function NotificationButton({showNotificationBlock}){
             </svg>
             <p className="text-black duration-200 group-hover:text-[gray] text-transparent hidden md:block">Notifications</p>
         </div>
+        
     );
 }
