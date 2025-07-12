@@ -22,8 +22,9 @@ function Post({post, getBack, setUserProfile,stompClient}){
                     setUserProfile={setUserProfile}></CommentsControl>)
             }
              
-        </li>
-
+        </li> 
+ 
+ 
     );
 }
 
