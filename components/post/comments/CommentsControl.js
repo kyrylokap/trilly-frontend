@@ -4,8 +4,9 @@ import Comment from "./Comment";
 import ExitButton from "../../ExitButton";
 import { getComments, sendComment } from "../../../services/commentsService";
 import Loader from "../../Loader";
+import { sendNotification } from "../../../services/notificationService";
 
-function CommentsControl({handleBack, postId, setUserProfile}){
+function CommentsControl({handleBack, postId, setUserProfile, profileUsername, stompClient}){
     const [commentToSend, setComment] = useState('');
 
     const [comments,setComments] = useState([]);
@@ -34,7 +35,7 @@ function CommentsControl({handleBack, postId, setUserProfile}){
                 : 
             <ul className=" overflow-y-auto scrollbar-hide  flex-1">
                 {comments.map((comment) => {
-                    return <Comment comment={comment} setUserProfile={setUserProfile}/>;
+                    return <Comment stompClient={stompClient} comment={comment} setUserProfile={setUserProfile}/>;
                 })}
             </ul> }
 
@@ -42,7 +43,8 @@ function CommentsControl({handleBack, postId, setUserProfile}){
             
         
             <form onSubmit={(e) => {e.preventDefault();
-                                    sendComment(localStorage.getItem("username"), commentToSend, postId, setComment, setComments);}}>
+                                    sendComment(localStorage.getItem("username"), commentToSend, postId, setComment, setComments);
+                                    sendNotification(profileUsername, ` comments your post`, stompClient);}}>
                 <input value={commentToSend} onChange={(e) => {
                     setComment(e.target.value)
                 }} className="w-full rounded-lg px-2 py-[clamp(2px,0.4vw,10px)]  text-black

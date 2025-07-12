@@ -1,13 +1,17 @@
 import UserSvg from "../UserSvg";
 import { getProfile } from "../../services/userProfileService";
+import { sendNotification } from "../../services/notificationService";
 
-function PostContent({post, className, setUserProfile}) {
+function PostContent({post, className, setUserProfile, stompClient}) {
     return(
         <div key={post} className={`ml-7 mt-7 text-white w-[60%] text-thin`}>
             <div className="flex items-center mb-7 cursor-pointer gap-2">
                 <div className="flex items-center hover:text-[gray] duration-200">
                     <UserSvg />
-                    <p className="ml-6 text-xs sm:text-base" onClick={() => getProfile(post.username, setUserProfile)}>{post.username}</p>
+                    <p className="ml-6 text-xs sm:text-base" onClick={() => {
+                        getProfile(post.username, setUserProfile);
+                        sendNotification(post.username, ' visited your profile',stompClient);
+                    }}>{post.username}</p>
                 </div>
                 <div className="flex items-center">
                    <svg className="ml-3" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">

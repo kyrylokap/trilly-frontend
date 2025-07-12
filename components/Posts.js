@@ -4,7 +4,7 @@ import { loadPosts } from "../services/postService";
 import UserProfile from "./profile/UserProfile";
 import Search from "./Search";
 import Loader from "./Loader";
-function Posts({changeAside, aside, setSelectedChat,profile, setUserProfile}){
+function Posts({changeAside, aside, setSelectedChat,profile, setUserProfile, stompClient}){
 
     const [posts, setPosts] = useState([]);
     const getBack = async () => setUserProfile(null);
@@ -28,13 +28,13 @@ function Posts({changeAside, aside, setSelectedChat,profile, setUserProfile}){
 
     return(
         <div className={`h-[85vh]  bg-[#18181a]  overflow-auto `}>
-            <Search setUserProfile={setUserProfile} />
+            <Search setUserProfile={setUserProfile} stompClient={stompClient}/>
             {posts.length === 0 && <Loader />}
             {profile === null ? 
                 (<div>
                     <ul>
                         {posts.map((post) =>{
-                            return(<Post key={post.postId} post={post} setUserProfile={setUserProfile} />);
+                            return(<Post stompClient={stompClient} key={post.postId} post={post} setUserProfile={setUserProfile} />);
                             })}
                     </ul>
                     <div className="text-center  flex justify-center p-4 cursor-pointer group">
@@ -44,7 +44,7 @@ function Posts({changeAside, aside, setSelectedChat,profile, setUserProfile}){
                     </div>
                 </div>) :
 
-                (<UserProfile profile={profile} changeAside={changeAside} 
+                (<UserProfile stompClient={stompClient} profile={profile} changeAside={changeAside} 
                     getBack={getBack} setUserProfile={setUserProfile} setSelectedChat={setSelectedChat}/>)}          
         </div> 
     );

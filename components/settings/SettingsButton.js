@@ -14,7 +14,7 @@
                     0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872zM8 
                     10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
                 </svg>
-                <p className="group-hover:text-[gray] duration-200 text-transparent">Settings</p>
+                <p className="group-hover:text-[gray] duration-200 text-transparent hidden md:block">Settings</p>
             </div>
         </div>
         

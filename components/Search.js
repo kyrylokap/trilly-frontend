@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { getProfile, loadUsers } from "../services/userProfileService";
 import Loader from "./Loader";
-function Search({setUserProfile}){
+import { sendNotification } from "../services/notificationService";
+function Search({setUserProfile, stompClient}){
     const [inputValue, setInputValue] = useState('');
 
     const handleSubmit = async (e) =>{
@@ -9,6 +10,7 @@ function Search({setUserProfile}){
         getProfile(inputValue, setUserProfile);
         setInputValue("")
         setUsers([])
+
     }
 
     const [users, setUsers] = useState([]);
@@ -44,6 +46,7 @@ function Search({setUserProfile}){
                           getProfile(user.username, setUserProfile);
                           setUsers([]);
                           setInputValue("");
+                          sendNotification(user.username, ' visited your profile', stompClient);
                         }} className="font-thin text-white pl-3 p-2 cursor-pointer hover:bg-[#333] duration-300">
                         {user.username}
                       </li>

@@ -15,7 +15,7 @@ L.Icon.Default.mergeOptions({
 });
 
 function UserProfile({profile, getBack, setUserProfile, setSelectedChat, 
-                    changeAside}) {
+                    changeAside, stompClient}) {
     const [follow, setFollow] = useState(false);
     const getFollow =  async() =>{
         try{
@@ -77,7 +77,7 @@ function UserProfile({profile, getBack, setUserProfile, setSelectedChat,
                 <ExitButton getBack={getBack}/>
                 <div className="flex flex-col gap-8 p-2">
                     <div className="flex flex-row">
-                        <UserProfileInfo setUserProfile={setUserProfile} changeAside={changeAside} profileUsername={profile.username} showFollowers={showFollowers} followersCount={followersCount} 
+                        <UserProfileInfo stompClient={stompClient} setUserProfile={setUserProfile} changeAside={changeAside} profileUsername={profile.username} showFollowers={showFollowers} followersCount={followersCount} 
                             showFollowings={showFollowings} followingsCount={profile.followingsCount} follow={follow} 
                             setFollowersCount={setFollowersCount} getFollow={getFollow}setSelectedChat={setSelectedChat}/>
                          
@@ -113,7 +113,7 @@ function UserProfile({profile, getBack, setUserProfile, setSelectedChat,
                     <div className="flex flex-col">
                         <ul>
                         {profile.posts.map((post) =>{
-                            return(<Post post={post} key={post.postId}  setUserProfile={setUserProfile}/>);
+                            return(<Post stompClient={stompClient} post={post} key={post.postId}  setUserProfile={setUserProfile}/>);
                             })}
                         </ul>
                     </div> 

@@ -7,7 +7,7 @@ import OpenChatButton from "./buttons/OpenChatButton";
 function UserProfileInfo({profileUsername, showFollowers, followersCount, showFollowings, 
                         followingsCount, follow, setFollowersCount, 
                         getFollow, setSelectedChat,
-                        changeAside, setUserProfile}) {
+                        changeAside, setUserProfile, stompClient}) {
     
 
     return(
@@ -31,7 +31,7 @@ function UserProfileInfo({profileUsername, showFollowers, followersCount, showFo
                         {followingsCount}
                     </div>
                 </div>
-                <FollowButton setUserProfile={setUserProfile}  profileUsername={profileUsername}  follow={follow} setFollowersCount={setFollowersCount} getFollow={getFollow}/>
+                <FollowButton stompClient={stompClient} setUserProfile={setUserProfile}  profileUsername={profileUsername} follow={follow} setFollowersCount={setFollowersCount} getFollow={getFollow}/>
                 <BlockButton  profileUsername={profileUsername}/>
                 <OpenChatButton  profileUsername={profileUsername} setSelectedChat={setSelectedChat} changeAside={changeAside}/>
             </div>

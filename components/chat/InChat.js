@@ -30,18 +30,18 @@ function InChat({selectedChatId, handleBack, chatMembers, setChats}){
         connectHeaders: {
             Authorization: "Bearer " + localStorage.getItem("token")
         },
-            onConnect: () => {
-    stompClient.current.subscribe("/topic/messages", (msg) => {
-        const message = JSON.parse(msg.body);
-        if (message.chatId === selectedChatId){
-            setMessages(prev => ({
-                messages: [...prev.messages, message.text],
-                times: [...prev.times, message.time],
-                senders: [...prev.senders, message.sender],
-                types: [...(prev.types || []), message.type]
-            }));
-        }
-    });
+        onConnect: () => {
+            stompClient.current.subscribe("/topic/messages", (msg) => {
+            const message = JSON.parse(msg.body);
+            if (message.chatId === selectedChatId){
+                setMessages(prev => ({
+                    messages: [...prev.messages, message.text],
+                    times: [...prev.times, message.time],
+                    senders: [...prev.senders, message.sender],
+                    types: [...(prev.types ), message.type]
+                }));
+            }
+        });
 
     stompClient.current.subscribe("/topic/typing", (msg) => {
         const typingData = JSON.parse(msg.body);

@@ -31,8 +31,7 @@ export const sendMessageSocket = (e, selectedChatId, input, setInput, type, stom
             body: JSON.stringify({
                 chatId: selectedChatId,
                 text: input,
-                type: type/*,
-                token: "Bearer " + localStorage.getItem("token")*/
+                type: type
             })
         });
         setInput("");
