@@ -16,8 +16,8 @@ import { getUserChats } from "../services/chatService";
         },[])
       
       return (
-        <div className="fixed inset-0 z-50 p-4 md:static md:w-[300px] md:p-0 md:z-auto">
-          <div className="scrollbar-hide  right-0 fixed top-0 bottom-0 z-20 backdrop-blur-md p-4 overflow-auto w-screen border-2 border-[#2a2a2e] 
+        <div className="fixed inset-0 z-30 p-4 md:static md:w-[300px] md:p-0 md:z-auto">
+          <div className="scrollbar-hide  right-0 fixed top-0 bottom-0 z-30 backdrop-blur-md p-4 overflow-auto w-screen border-2 border-[#2a2a2e] 
                       md:absolute md:right-0 md:top-0 md:h-[85vh] md:w-[40vw] md:min-w-[220px]">
             <motion.div
               key="aside"

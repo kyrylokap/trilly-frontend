@@ -23,22 +23,7 @@ export const sendMessage = async (e, selectedChatId, input, setInput, setMessage
     }catch(error){}
 }
 
-export const sendMessageSocket = (e, selectedChatId, input, setInput, type, stompClient) => {
-    e.preventDefault();
-    if (stompClient && stompClient.connected) {
-        stompClient.publish({
-            destination: "/app/chat.send",
-            body: JSON.stringify({
-                chatId: selectedChatId,
-                text: input,
-                type: type
-            })
-        });
-        setInput("");
-    } else {
-        console.error("STOMP client not subcribe");
-    }
-}
+
 
 export const getMessages = async (selectedChatId, setMessages) => {
     try{
@@ -79,3 +64,5 @@ export const sendPost = async (secondUsername, mediaUrl) =>{
       }); 
     } catch(e){}
 }
+
+
