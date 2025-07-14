@@ -2,7 +2,7 @@ import { useState } from "react";
 import MessageMenu from "./MessageMenu";
 
 
-function Message({message, time, sender, type, setInput,  setChangingMessage, id, setId, setIsChanging}){
+function Message({message, time, sender, type, setInput,  setChangingMessage, id, setId, setIsChanging, selectedChatId, stompClient}){
     const [messageMenu, setMessageMenu] = useState(false);
 
 
@@ -12,7 +12,8 @@ function Message({message, time, sender, type, setInput,  setChangingMessage, id
                 setMessageMenu(prev => !prev);
             }}}  className={`flex flex-col ${localStorage.getItem("username") === sender ? 'items-end' : 'items-start'} relative  inline-block`}>
 
-            {messageMenu && <MessageMenu setIsChanging={setIsChanging} setId={setId} id={id} setChangingMessage={setChangingMessage} message={message} messageType={type}/>}
+            {messageMenu && <MessageMenu selectedChatId={selectedChatId}  setIsChanging={setIsChanging} stompClient={stompClient}
+                            setId={setId} id={id} setChangingMessage={setChangingMessage} message={message} messageType={type}/>}
 
             <li className={`max-w-[50%] ${localStorage.getItem("username") === sender ? "bg-zinc-800 rounded-l-xl  " : "bg-slate-600 rounded-r-xl"}
                      text-white p-3 w-fit  rounded-t-xl break-all`}>

@@ -1,12 +1,11 @@
 import Message from './Message'
 import { useState, useEffect ,useRef} from "react";
 import ExitButton from '../ExitButton';
-import {   changeMessageSocket, handleTyping, sendMessageSocket } from '../../services/messageService';
+import {   changeMessageSocket, handleConnect, handleTyping, sendMessageSocket } from '../../services/messageService';
 import {   getMessages } from '../../services/inChatService';
 import Loader from '../Loader';
 import { Client } from "@stomp/stompjs";
 import SockJS from "sockjs-client";
-import { changeMessage } from '../../services/messageService';
 import MessageChangingBlock from './MessageChangingBlock';
 function InChat({selectedChatId, handleBack, chatMembers, setChats}){
     const [messagesDTO, setMessages] = useState({ messages: [], times: [], senders:[], types: [], ids: []})
@@ -16,77 +15,26 @@ function InChat({selectedChatId, handleBack, chatMembers, setChats}){
 
     useEffect(() => {
         getMessages(selectedChatId, setMessages);
-    }, [selectedChatId])
+    }, [selectedChatId]);
 
     
 
     useEffect(() => {
-
-    stompClient.current = new Client({
-        webSocketFactory: () => new SockJS("http://localhost:9999/ws"),
-        reconnectDelay: 5000,
-        connectHeaders: {
-            Authorization: "Bearer " + localStorage.getItem("token")
-        },
-        onConnect: () => {
-            stompClient.current.subscribe("/topic/messages", (msg) => {
-            const message = JSON.parse(msg.body);
-            if (message.chatId === selectedChatId){
-                setMessages(prev => ({
-                    messages: [...prev.messages, message.text],
-                    times: [...prev.times, message.time],
-                    senders: [...prev.senders, message.sender],
-                    types: [...prev.types, message.type],
-                    ids: [...prev.ids, message.id]
-                }));
-            }
-            });
-            stompClient.current.subscribe("/topic/typing", (msg) => {
-                const typingData = JSON.parse(msg.body);
-                if (
-                    typingData.chatId === selectedChatId &&
-                    typingData.username !== localStorage.getItem("username")
-                ) {
-                    if (typingData.typing) {
-                        setTypingUser(typingData.username);
-                    } else {
-                        setTypingUser(null);
-                    }
-                }
-            });
-            stompClient.current.subscribe("/topic/change", (msg) => {
-            const message = JSON.parse(msg.body);
-            if (message.chatId === selectedChatId) {
-                setMessages(prev => {
-                    const newMessages = [...prev.messages];
-                    const index = prev.ids.findIndex(mId => mId === message.id);
-                
-                    if (index !== -1) {
-                        newMessages[index] = message.text;
-                    
-                        return {
-                            ...prev,
-                            messages: newMessages,
-                            times: [...prev.times.slice(0, index), message.time, ...prev.times.slice(index + 1)],
-                            senders: prev.senders,
-                            types: prev.types,
-                            ids: prev.ids
-                        };
-                    }
-                
-                    return prev;
-                });
-            }
-            });
-        },
+        stompClient.current = new Client({
+            webSocketFactory: () => new SockJS("http://localhost:9999/ws"),
+            reconnectDelay: 5000,
+            connectHeaders: {
+                Authorization: "Bearer " + localStorage.getItem("token")
+            },
+            onConnect: () => handleConnect(stompClient, selectedChatId, setMessages, setTypingUser),
             onStompError: (frame) => {
                 console.error('Broker reported error: ' + frame.headers['message']);
                 console.error('Additional details: ' + frame.body);
             }});
 
-        stompClient.current.activate();
-        return () => {
-            if (stompClient.current) stompClient.current.deactivate();
+            stompClient.current.activate();
+            return () => {
+                if (stompClient.current) stompClient.current.deactivate();
         };}, [selectedChatId]);
 
     const send = () => {
@@ -144,7 +92,9 @@ function InChat({selectedChatId, handleBack, chatMembers, setChats}){
             <div className="bg-transparent p-4 rounded-t-lg space-y-2 flex flex-col justify-between overflow-y-auto min-h-[500px] max-h-[500px] scrollbar-hide border-2 border-[gray]" ref={containerRef}>
                 <ul className="space-y-2 flex-col ">
                     {messagesDTO.messages.map((message, index) => (
-                        <Message setIsChanging={setIsChanging} setId={setId} id={messagesDTO.ids[index]} setChangingMessage={setChangingMessage}  setInput={setInput} key={index} type={messagesDTO.types[index]} message={message} time={messagesDTO.times[index]} sender={messagesDTO.senders[index]} />
+                        <Message selectedChatId={selectedChatId} stompClient={stompClient} setIsChanging={setIsChanging} setId={setId}
+                            id={messagesDTO.ids[index]} setChangingMessage={setChangingMessage}  setInput={setInput} key={index} 
+                            type={messagesDTO.types[index]} message={message} time={messagesDTO.times[index]} sender={messagesDTO.senders[index]} />
                     ))}
                 </ul>
 

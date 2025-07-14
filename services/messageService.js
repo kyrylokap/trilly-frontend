@@ -68,3 +68,91 @@ export const sendMessageSocket = (selectedChatId, input, setInput, type, stompCl
         console.error("STOMP client not subcribe");
     }
 }
+
+export const handleConnect = (stompClient, selectedChatId, setMessages, setTypingUser) => {
+    stompClient.current.subscribe("/topic/messages", (msg) => {
+        const message = JSON.parse(msg.body);
+        if (message.chatId === selectedChatId){
+            setMessages(prev => ({
+                messages: [...prev.messages, message.text],
+                times: [...prev.times, message.time],
+                senders: [...prev.senders, message.sender],
+                types: [...prev.types, message.type],
+                ids: [...prev.ids, message.id]
+            }));
+        }
+        });
+        stompClient.current.subscribe("/topic/typing", (msg) => {
+            const typingData = JSON.parse(msg.body);
+            if (
+                typingData.chatId === selectedChatId &&
+                typingData.username !== localStorage.getItem("username")
+            ) {
+                if (typingData.typing) {
+                    setTypingUser(typingData.username);
+                } else {
+                    setTypingUser(null);
+                }
+            }
+        });
+        stompClient.current.subscribe("/topic/change", (msg) => {
+        const message = JSON.parse(msg.body);
+        if (message.chatId === selectedChatId) {
+            setMessages(prev => {
+                const newMessages = [...prev.messages];
+                const index = prev.ids.findIndex(mId => mId === message.id);
+            
+                if (index !== -1) {
+                    newMessages[index] = message.text;
+                
+                    return {
+                        ...prev,
+                        messages: newMessages,
+                        times: [...prev.times.slice(0, index), message.time, ...prev.times.slice(index + 1)],
+                        senders: prev.senders,
+                        types: prev.types,
+                        ids: prev.ids
+                    };
+                }
+                return prev;
+            });
+        }});
+
+        stompClient.current.subscribe("/topic/delete", (msg) => {
+            const message = JSON.parse(msg.body);
+            if (message.chatId === selectedChatId) {
+                setMessages(prev => {
+                    const newMessages = [...prev.messages];
+                    const index = prev.ids.findIndex(id => id === message.id);
+                
+                    if (index !== -1) {
+                        newMessages.splice(index, 1);
+                        return {
+                            ...prev,
+                            messages: newMessages,
+                            times: [...prev.times.slice(0, index), ...prev.times.slice(index + 1)],
+                            senders: [...prev.senders.slice(0, index), ...prev.senders.slice(index + 1)],
+                            types: [...prev.types.slice(0, index), ...prev.types.slice(index + 1)],
+                            ids: [...prev.ids.slice(0, index), ...prev.ids.slice(index + 1)]
+                        };
+                    }
+                    return prev;
+                });
+            }
+        });
+}
+
+export const deleteMessageSocket = (selectedChatId, messageId, stompClient) => {
+    
+    if (stompClient.current && stompClient.current.connected) {
+        stompClient.current.publish({
+            destination: "/app/chat.delete",
+            body: JSON.stringify({
+                chatId: selectedChatId,
+                id: messageId
+            })
+        });
+    } else {
+        console.error("STOMP client not subcribe");
+    }
+}
