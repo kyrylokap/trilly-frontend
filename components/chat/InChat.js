@@ -1,22 +1,19 @@
 import Message from './Message'
 import { useState, useEffect ,useRef} from "react";
 import ExitButton from '../ExitButton';
-import {   changeMessageSocket, handleConnect, handleTyping, sendMessageSocket } from '../../services/messageService';
+import {   changeMessageSocket, handleConnect, handleTyping, sendMessageSocket, sendSeenMessages } from '../../services/messageService';
 import {   getMessages } from '../../services/inChatService';
 import Loader from '../Loader';
 import { Client } from "@stomp/stompjs";
 import SockJS from "sockjs-client";
 import MessageChangingBlock from './MessageChangingBlock';
 function InChat({selectedChatId, handleBack, chatMembers, setChats}){
-    const [messagesDTO, setMessages] = useState({ messages: [], times: [], senders:[], types: [], ids: []})
+    const [messagesDTO, setMessages] = useState([]);
     const [input, setInput] = useState('')
     const containerRef = useRef(null);
     const stompClient = useRef(null);
 
-    useEffect(() => {
-        getMessages(selectedChatId, setMessages);
-    }, [selectedChatId]);
-
+    
     
 
     useEffect(() => {
@@ -52,6 +49,11 @@ function InChat({selectedChatId, handleBack, chatMembers, setChats}){
         stompClient.current = null;
         handleBack();
     }
+    useEffect(() => {
+        getMessages(selectedChatId, setMessages);
+        sendSeenMessages(selectedChatId);
+    }, [selectedChatId]);
+
 
     
 
@@ -75,6 +77,11 @@ function InChat({selectedChatId, handleBack, chatMembers, setChats}){
     };
 
     useEffect(() => {
+        sendSeenMessages(selectedChatId);
+    }, [messagesDTO, selectedChatId]);
+
+
+    useEffect(() => {
         const el = containerRef.current;
         if(el){
            el.scrollTop = el.scrollHeight;
@@ -91,14 +98,14 @@ function InChat({selectedChatId, handleBack, chatMembers, setChats}){
             
             <div className="bg-transparent p-4 rounded-t-lg space-y-2 flex flex-col justify-between overflow-y-auto min-h-[500px] max-h-[500px] scrollbar-hide border-2 border-[gray]" ref={containerRef}>
                 <ul className="space-y-2 flex-col ">
-                    {messagesDTO.messages.map((message, index) => (
+                    {messagesDTO.map((message, index) => (
                         <Message selectedChatId={selectedChatId} stompClient={stompClient} setIsChanging={setIsChanging} setId={setId}
-                            id={messagesDTO.ids[index]} setChangingMessage={setChangingMessage}  setInput={setInput} key={index} 
-                            type={messagesDTO.types[index]} message={message} time={messagesDTO.times[index]} sender={messagesDTO.senders[index]} />
+                            setChangingMessage={setChangingMessage}  setInput={setInput} key={index} 
+                            message={message}  />
                     ))}
                 </ul>
 
-                {messagesDTO.messages.length === 0 && <Loader />}
+                {messagesDTO.length === 0 && <Loader />}
                 <div className={`text-sm italic text-gray-400  flex mt-2 gap-2 ${!typingUser && 'invisible'}`}>
                         {typingUser} typing...
                 </div>

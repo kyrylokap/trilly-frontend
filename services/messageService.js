@@ -70,18 +70,23 @@ export const sendMessageSocket = (selectedChatId, input, setInput, type, stompCl
 }
 
 export const handleConnect = (stompClient, selectedChatId, setMessages, setTypingUser) => {
-    stompClient.current.subscribe("/topic/messages", (msg) => {
-        const message = JSON.parse(msg.body);
-        if (message.chatId === selectedChatId){
-            setMessages(prev => ({
-                messages: [...prev.messages, message.text],
-                times: [...prev.times, message.time],
-                senders: [...prev.senders, message.sender],
-                types: [...prev.types, message.type],
-                ids: [...prev.ids, message.id]
-            }));
-        }
+        stompClient.current.subscribe("/topic/messages", (msg) => {
+            const message = JSON.parse(msg.body);
+            if (message.chatId === selectedChatId) {
+                setMessages(prev => [
+                    ...prev,
+                    {
+                        message: message.text,
+                        time: message.time,
+                        sender: message.sender,
+                        type: message.type,
+                        id: message.id
+                    }
+                ]);
+            }
         });
+
+
         stompClient.current.subscribe("/topic/typing", (msg) => {
             const typingData = JSON.parse(msg.body);
             if (
@@ -96,51 +101,40 @@ export const handleConnect = (stompClient, selectedChatId, setMessages, setTypin
             }
         });
         stompClient.current.subscribe("/topic/change", (msg) => {
-        const message = JSON.parse(msg.body);
-        if (message.chatId === selectedChatId) {
-            setMessages(prev => {
-                const newMessages = [...prev.messages];
-                const index = prev.ids.findIndex(mId => mId === message.id);
-            
-                if (index !== -1) {
-                    newMessages[index] = message.text;
-                
-                    return {
-                        ...prev,
-                        messages: newMessages,
-                        times: [...prev.times.slice(0, index), message.time, ...prev.times.slice(index + 1)],
-                        senders: prev.senders,
-                        types: prev.types,
-                        ids: prev.ids
-                    };
-                }
-                return prev;
-            });
-        }});
+            const message = JSON.parse(msg.body);
+            if (message.chatId === selectedChatId) {
+                setMessages(prev => {
+                    return prev.map(m => 
+                        m.id === message.id
+                        ? { ...m, message: message.text, time: message.time }
+                        : m
+                    );
+                });
+            }
+        });
 
         stompClient.current.subscribe("/topic/delete", (msg) => {
             const message = JSON.parse(msg.body);
             if (message.chatId === selectedChatId) {
-                setMessages(prev => {
-                    const newMessages = [...prev.messages];
-                    const index = prev.ids.findIndex(id => id === message.id);
-                
-                    if (index !== -1) {
-                        newMessages.splice(index, 1);
-                        return {
-                            ...prev,
-                            messages: newMessages,
-                            times: [...prev.times.slice(0, index), ...prev.times.slice(index + 1)],
-                            senders: [...prev.senders.slice(0, index), ...prev.senders.slice(index + 1)],
-                            types: [...prev.types.slice(0, index), ...prev.types.slice(index + 1)],
-                            ids: [...prev.ids.slice(0, index), ...prev.ids.slice(index + 1)]
-                        };
-                    }
-                    return prev;
-                });
+                setMessages(prev => prev.filter(m => m.id !== message.id));
             }
         });
 }
+
+export const sendSeenMessages = async (chatId) => {
+    try{
+        await axios.put(`http://localhost:9999/api/v1/chats/markSeen`, null,{
+            params:{
+                chatId: chatId
+            },
+            headers:{
+                Authorization: 'Bearer ' + localStorage.getItem("token")
+            }
+        });
+    }
+    catch(e){}
+};
+
 
 export const deleteMessageSocket = (selectedChatId, messageId, stompClient) => {
     
