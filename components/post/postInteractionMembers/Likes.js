@@ -1,5 +1,6 @@
 
 function Likes({likePost, post, like}){
+    
     return(
         <div className={`flex items-center gap-2 cursor-pointer pb-3 group`} onClick={likePost}>
             <svg xmlns="http://www.w3.org/2000/svg"  fill="currentColor" 

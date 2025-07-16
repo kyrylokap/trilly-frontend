@@ -1,7 +1,7 @@
 import { sendPost } from "../../services/inChatService";
 
 
-export default function UserList({ users, getProfile, setUserProfile, close, mode, mediaUrl}){
+export default function UserList({ users, getProfile, setUserProfile, close, mode, mediaUrl,stompClient}){
     return (
         <ul className="space-y-3">
            {users.length > 0 ? (
@@ -11,7 +11,7 @@ export default function UserList({ users, getProfile, setUserProfile, close, mod
                     getProfile(user.username, setUserProfile);
                     close();
                   } else {
-                    sendPost(user.username, mediaUrl)
+                    sendPost(user.username, mediaUrl, stompClient)
                   }
                 }}
                  className="flex items-center justify-between p-3 rounded-lg shadow-sm  hover:shadow-xl transition cursor-pointer">

@@ -63,7 +63,7 @@ export const sendMessageSocket = (selectedChatId, input, setInput, type, stompCl
                 type: type
             })
         });
-        setInput("");
+        if(setInput){setInput("");}
     } else {
         console.error("STOMP client not subcribe");
     }

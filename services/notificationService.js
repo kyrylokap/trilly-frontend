@@ -18,8 +18,6 @@ export const getNotifications = async (setNotifications) => {
 
 export const sendNotification = async (to, text, stompClient) => {
     
-    console.log(stompClient.current);
-    console.log(stompClient.current.connected);
     if (stompClient && stompClient.current.connected) {
         stompClient.current.publish({
             destination: "/app/notifications.send",

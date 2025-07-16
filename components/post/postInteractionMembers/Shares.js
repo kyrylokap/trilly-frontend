@@ -3,7 +3,7 @@ import ExitButton from "../../ExitButton";
 import { getUsers } from "../../../services/userListService";
 import UserList from "../../profile/UserList";
 
-function Shares({ mediaUrl}){
+function Shares({ mediaUrl, stompClient}){
     const [share, setShare] = useState(false);
     const changeShare = (e) =>{
         setShare(e);
@@ -28,7 +28,7 @@ function Shares({ mediaUrl}){
                         <ExitButton getBack={() => changeShare(!share)}/>
                     </div>
                     <p className="text-center text-3xl  ">Share to</p>
-                    <UserList users={users}  mediaUrl={mediaUrl} mode={false}/>
+                    <UserList stompClient={stompClient} users={users}  mediaUrl={mediaUrl} mode={false}/>
                 </div>
             </div>}
           

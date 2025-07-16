@@ -1,10 +1,11 @@
 
 import axios from "axios"
+import { sendMessageSocket } from "./messageService";
 
 const url = "http://localhost:9999/api/v1/";
 
 export const sendMessage = async (e, selectedChatId, input, setInput, setMessages, type) => {
-    e.preventDefault();
+    if(e){e.preventDefault();}
     try{
         await axios.post(
             `${url}chats/`+ selectedChatId +"/messages",
@@ -41,9 +42,10 @@ export const getMessages = async (selectedChatId, setMessages) => {
 };
 
 
-export const sendPost = async (secondUsername, mediaUrl) =>{
+export const sendPost = async (secondUsername, mediaUrl, stompClient) =>{
+    let chat
     try{
-        const chat = await axios.get(`${url}users/getChat`,{
+        chat = await axios.get(`${url}users/getChat`,{
             params:{
                 secondUsername: secondUsername
             },
@@ -51,18 +53,12 @@ export const sendPost = async (secondUsername, mediaUrl) =>{
               Authorization: 'Bearer ' + localStorage.getItem('token')
               }
           });
-        console.log(chat);
-        await axios.post(`${url}chats/${chat.data.chatId}/messages`, {
-        text: mediaUrl,
-        id: null,
-        type: "image"
-      },
-      {
-        headers: {
-          Authorization: 'Bearer ' + localStorage.getItem('token')
-        }
-      }); 
-    } catch(e){}
+        sendMessageSocket(chat.data.chatId, mediaUrl, null,"image",stompClient.current);
+    } catch(e){
+        console.log(e)
+    }
+    
+
 }
 
 
