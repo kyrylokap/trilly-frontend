@@ -1,9 +1,13 @@
 import axios from "axios"
+import { IsTokenExpired } from "../components/IsTokenExpired";
 
 const url = "http://localhost:9999/api/v1/user"
 
 export const sendPos = async () => {
-  if (localStorage.getItem('token') !== null) {
+  const token = localStorage.getItem('token');
+  if (!token)return;
+
+    
     try {
       const position = await new Promise((resolve, reject) => {
         navigator.geolocation.getCurrentPosition(resolve, reject);
@@ -23,7 +27,7 @@ export const sendPos = async () => {
     } catch (e) {
       console.error("Error sending position:", e);
     }
-  }
+  
 }
 
 export const fetchPositions = async (profile, setPositions) => {

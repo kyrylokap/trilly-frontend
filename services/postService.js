@@ -31,10 +31,12 @@ export const checkIfLiked = async(setLike, postId) => {
 }
 
 export const loadPosts = async () => {
+    const token = localStorage.getItem('token')
+    if(!token)return [];
     try{
         const response = await axios.get("http://localhost:9999/api/v1/users/posts",
                 {headers: {
-                    Authorization: 'Bearer ' + localStorage.getItem('token')
+                    Authorization: 'Bearer ' + token
                     }
                 })
         return response.data;

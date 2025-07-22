@@ -32,11 +32,19 @@ function Posts({changeAside, aside, setSelectedChat,profile, setUserProfile, sto
             {posts.length === 0 && <Loader />}
             {profile === null ? 
                 (<div>
-                    <ul>
-                        {posts.map((post) =>{
-                            return(<Post stompClient={stompClient} key={post.postId} post={post} setUserProfile={setUserProfile} />);
-                            })}
-                    </ul>
+                    {posts && posts.length > 0 && (
+                  <ul>
+                    {posts.map((post) => (
+                      <Post
+                        stompClient={stompClient}
+                        key={post.postId}
+                        post={post}
+                        setUserProfile={setUserProfile}
+                      />
+                    ))}
+                  </ul>
+                )}
+                    
                     <div className="text-center  flex justify-center p-4 cursor-pointer group">
                         <p onClick={loadMore} className="text-white text-xl   border-white border-1 border-b group-hover:text-[gray] duration-300">
                             Load more

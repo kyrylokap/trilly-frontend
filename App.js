@@ -8,11 +8,13 @@ import { Oauth2Success } from './components/Oauth2Success';
 import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
 import { useState } from 'react';
+import { IsTokenExpired } from './components/IsTokenExpired';
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem("token"));
 
   return (
     <>
+    <IsTokenExpired />
     <PositionTracker />
     <BrowserRouter>
       <Routes>
